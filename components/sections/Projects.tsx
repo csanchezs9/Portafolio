@@ -50,10 +50,11 @@ const projects = [
   {
     title: "Infinito Piercing - Generador de Catálogos PDF",
     description:
-      "Sistema automatizado que genera catálogos PDF"+
-      "profesionales con productos en tiempo real desde la API de Shopify. Permite seleccionar diferentes"+
+      "Sistema automatizado que genera catálogos PDF "+
+      "profesionales con productos en tiempo real desde la API de Shopify. Permite seleccionar diferentes "+
       "colecciones (Oreja, Nariz, Corporal, etc.) y descargar catálogos listos para imprimir en formato A4 con"   +
-      "diseño minimalista blanco y negro.",
+      "diseño minimalista blanco y negro.\n"+
+      "https://infinitopiercing.com/",
 
     tags: ["Node.js", "Express", "Puppeteer", "Shopify API", "HTML", "CSS", "JavaScript", "CORS", "node-fetch", "pkg"],
     github: "https://github.com/csanchezs9/infinito",
@@ -91,7 +92,7 @@ export default function Projects() {
             >
               <Card className="h-full flex flex-col hover:shadow-lg transition-shadow">
                 <CardHeader>
-                  <CardTitle>{project.title}</CardTitle>
+                  <CardTitle className="mb-2">{project.title}</CardTitle>
                   <CardDescription>{project.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="flex-grow">

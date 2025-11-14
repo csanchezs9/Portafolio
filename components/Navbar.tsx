@@ -41,9 +41,9 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-xl font-bold"
+            className="text-xl font-normal"
           >
-            Portafolio Web
+            By Camilink
           </motion.div>
 
           {/* Desktop Menu */}

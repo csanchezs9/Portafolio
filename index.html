@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORSCHE 911 - FUTURE DRIVE</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Scanlines Effect -->
+    <div class="scanlines"></div>
+
+    <!-- Glitch Overlay -->
+    <div class="glitch-overlay"></div>
+
+    <!-- Main Canvas for Three.js -->
+    <canvas id="webgl"></canvas>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="glitch" data-text="PORSCHE 911">PORSCHE 911</h1>
+            <p class="subtitle">CARRERA 4S</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">443</span>
+                    <span class="stat-label">HP</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">3.6</span>
+                    <span class="stat-label">0-100 KM/H</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">306</span>
+                    <span class="stat-label">KM/H MAX</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>SCROLL TO EXPLORE</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Performance Section -->
+    <section class="section performance">
+        <div class="content-wrapper">
+            <h2 class="section-title">PERFORMANCE</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3>TWIN-TURBO POWER</h3>
+                    <p>3.0L flat-six engine with enhanced turbochargers delivering pure adrenaline</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>ALL-WHEEL DRIVE</h3>
+                    <p>Intelligent AWD system that adapts to every road condition</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💨</div>
+                    <h3>AERODYNAMICS</h3>
+                    <p>Active aerodynamic elements for maximum downforce and efficiency</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section class="section technology">
+        <div class="content-wrapper">
+            <h2 class="section-title">TECHNOLOGY</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <div class="tech-number">01</div>
+                    <h3>PDK TRANSMISSION</h3>
+                    <p>8-speed dual-clutch transmission for lightning-fast shifts</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-number">02</div>
+                    <h3>PASM SUSPENSION</h3>
+                    <p>Adaptive suspension management for ultimate handling</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-number">03</div>
+                    <h3>PCM 6.0</h3>
+                    <p>Next-generation communication management system</p>
+                </div>
+                <div class="tech-item">
+                    <div class="tech-number">04</div>
+                    <h3>SPORT CHRONO</h3>
+                    <p>Precision timing and performance tracking</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Section -->
+    <section class="section design">
+        <div class="content-wrapper">
+            <h2 class="section-title">ICONIC DESIGN</h2>
+            <p class="design-text">
+                The unmistakable silhouette that has defined sports car excellence for generations.
+                Every curve, every line, crafted for performance and timeless beauty.
+            </p>
+            <div class="design-features">
+                <div class="feature">LED Matrix Headlights</div>
+                <div class="feature">20" Carrera S Wheels</div>
+                <div class="feature">Sport Exhaust System</div>
+                <div class="feature">Rear Wing Spoiler</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-text">
+                <p>PORSCHE 911 CARRERA 4S</p>
+                <p>FUTURE DRIVE EXPERIENCE</p>
+            </div>
+            <div class="footer-links">
+                <a href="#">CONFIGURE</a>
+                <a href="#">TEST DRIVE</a>
+                <a href="#">FIND DEALER</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

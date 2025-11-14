@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Download } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
 const projects = [
@@ -18,8 +18,8 @@ const projects = [
     title: "Web para Polles Bakeshop",
     description:
       "Landing page de e-commerce para 'Polles Bake Shop', una reposteria en Medellín que vende " +
-      "galletas, helados y bebidas. Construida con React, TypeScript y Tailwind CSS, incluye catálogo de productos, " +
-      "filtrado por categorías y carrito de compras (UI placeholder). Actualmente los productos están hardcodeados, " +
+      "galletas, helados y bebidas. Incluye catálogo de productos, " +
+      "filtrado por categorías y carrito de compras. Actualmente los productos están hardcodeados, " +
       "con Supabase pendiente de integrar.",
     tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "Supabase", "Lucide React", "Prettier"],
     github: "https://github.com/csanchezs9/Polles",
@@ -30,10 +30,34 @@ const projects = [
     description:
       "Permite atención automatizada 24/7, consulta de catálogo, verificación de pedidos, " +
       "y conexión con asesores humanos vía panel web en tiempo real. " +
-      "Incluye envío de multimedia (imágenes, documentos, audios), persistencia en SQLite " +
+      "Incluye envío de multimedia, persistencia en SQLite " +
       "y actualizaciones en tiempo real usando Web Sockets.",
     tags: ["Node.js", "Express", "Socket.io", "SQLite3", "WhatsApp Business API"],
     github: "https://github.com/csanchezs9/WhatsApp_automatizado_ZR",
+  },
+  {
+    title: "Dap-Autoparts",
+    description:
+      "Sistema de gestión de órdenes para DAP AutoPart's con app móvil Flutter para tablets " +
+      "y backend Node.js. Permite búsqueda de clientes, consulta de productos desde CSV, creación " +
+      "de órdenes con cálculo automático de precios, generación de PDFs y envío por correo. " +
+      "Incluye panel web de administración para gestión de catálogos y usuarios.\n"+
+      "https://zonarepuestera.com.co/",
+    tags: ["Flutter", "Dart", "Node.js", "Express", "Multer", "Nodemailer", "CSV Parser", "PDF Generation"],
+    github: "https://github.com/csanchezs9/Dap-autopart",
+
+  },
+  {
+    title: "Infinito Piercing - Generador de Catálogos PDF",
+    description:
+      "Sistema automatizado que genera catálogos PDF"+
+      "profesionales con productos en tiempo real desde la API de Shopify. Permite seleccionar diferentes"+
+      "colecciones (Oreja, Nariz, Corporal, etc.) y descargar catálogos listos para imprimir en formato A4 con"   +
+      "diseño minimalista blanco y negro.",
+
+    tags: ["Node.js", "Express", "Puppeteer", "Shopify API", "HTML", "CSS", "JavaScript", "CORS", "node-fetch", "pkg"],
+    github: "https://github.com/csanchezs9/infinito",
+    pdf: "/catalogo-infinito-topos.pdf",
   },
 ];
 
@@ -102,6 +126,19 @@ export default function Projects() {
                       >
                         <ExternalLink className="w-4 h-4" />
                         Demo
+                      </a>
+                    </Button>
+                  )}
+                  {project.pdf && (
+                    <Button size="sm" className="gap-2" asChild>
+                      <a
+                        href={project.pdf}
+                        download
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Download className="w-4 h-4" />
+                        Ver
                       </a>
                     </Button>
                   )}

@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { toast } from "sonner";
 
 const contactInfo = [
   {
@@ -26,6 +28,56 @@ const contactInfo = [
 ];
 
 export default function Contact() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success("¡Mensaje enviado!", {
+          description: "Gracias por contactarme. Te responderé pronto.",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        toast.error("Error", {
+          description: data.error || "No se pudo enviar el mensaje. Intenta de nuevo.",
+        });
+      }
+    } catch (error) {
+      toast.error("Error", {
+        description: "Hubo un problema al enviar el mensaje. Intenta de nuevo.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section id="contact" className="flex items-center justify-center px-4 py-16">
       <div className="max-w-4xl mx-auto w-full">
@@ -79,7 +131,7 @@ export default function Contact() {
         >
           <Card>
             <CardContent className="p-8">
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label
@@ -91,8 +143,11 @@ export default function Contact() {
                     <input
                       type="text"
                       id="name"
+                      value={formData.name}
+                      onChange={handleChange}
                       className="w-full px-4 py-2 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-ring"
                       placeholder="Tu nombre"
+                      required
                     />
                   </div>
                   <div>
@@ -105,8 +160,11 @@ export default function Contact() {
                     <input
                       type="email"
                       id="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       className="w-full px-4 py-2 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-ring"
                       placeholder="tu@email.com"
+                      required
                     />
                   </div>
                 </div>
@@ -120,12 +178,15 @@ export default function Contact() {
                   <textarea
                     id="message"
                     rows={5}
+                    value={formData.message}
+                    onChange={handleChange}
                     className="w-full px-4 py-2 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-ring resize-none"
                     placeholder="Tu mensaje..."
+                    required
                   />
                 </div>
-                <Button size="lg" className="w-full">
-                  Enviar Mensaje
+                <Button size="lg" className="w-full" type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? "Enviando..." : "Enviar Mensaje"}
                 </Button>
               </form>
             </CardContent>

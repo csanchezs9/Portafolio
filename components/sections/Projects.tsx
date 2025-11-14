@@ -42,7 +42,7 @@ const projects = [
       "y backend Node.js. Permite búsqueda de clientes, consulta de productos desde CSV, creación " +
       "de órdenes con cálculo automático de precios, generación de PDFs y envío por correo. " +
       "Incluye panel web de administración para gestión de catálogos y usuarios.\n"+
-      "https://zonarepuestera.com.co/",
+      "https://zonarepuestera.com.co",
     tags: ["Flutter", "Dart", "Node.js", "Express", "Multer", "Nodemailer", "CSV Parser", "PDF Generation"],
     github: "https://github.com/csanchezs9/Dap-autopart",
 
@@ -54,7 +54,7 @@ const projects = [
       "profesionales con productos en tiempo real desde la API de Shopify. Permite seleccionar diferentes "+
       "colecciones (Oreja, Nariz, Corporal, etc.) y descargar catálogos listos para imprimir en formato A4 con"   +
       "diseño minimalista blanco y negro.\n"+
-      "https://infinitopiercing.com/",
+      "https://infinitopiercing.com",
 
     tags: ["Node.js", "Express", "Puppeteer", "Shopify API", "HTML", "CSS", "JavaScript", "CORS", "node-fetch", "pkg"],
     github: "https://github.com/csanchezs9/infinito",

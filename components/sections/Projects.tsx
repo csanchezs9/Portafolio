@@ -18,8 +18,8 @@ const projects = [
     title: "Web para Polles Bakeshop",
     description:
       "Landing page de e-commerce para 'Polles Bake Shop', una reposteria en Medellín que vende " +
-      "galletas, helados y bebidas. Construida con React, TypeScript y Tailwind CSS, incluye catálogo de productos, " +     
-      "filtrado por categorías y carrito de compras (UI placeholder). Actualmente los productos están hardcodeados, " +     
+      "galletas, helados y bebidas. Construida con React, TypeScript y Tailwind CSS, incluye catálogo de productos, " +
+      "filtrado por categorías y carrito de compras (UI placeholder). Actualmente los productos están hardcodeados, " +
       "con Supabase pendiente de integrar.",
     tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "Supabase", "Lucide React", "Prettier"],
     github: "https://github.com/csanchezs9/Polles",
@@ -34,23 +34,6 @@ const projects = [
       "y actualizaciones en tiempo real usando Web Sockets.",
     tags: ["Node.js", "Express", "Socket.io", "SQLite3", "WhatsApp Business API"],
     github: "https://github.com/csanchezs9/WhatsApp_automatizado_ZR",
-    
-  },
-  {
-    title: "Portfolio CMS",
-    description:
-      "Sistema de gestión de contenido para portafolios con editor visual y generación de sitios estáticos.",
-    tags: ["Next.js", "MongoDB", "AWS"],
-    github: "#",
-    demo: "#",
-  },
-  {
-    title: "Analytics Dashboard",
-    description:
-      "Dashboard de análisis con gráficos interactivos, reportes y exportación de datos.",
-    tags: ["React", "Chart.js", "Node.js"],
-    github: "#",
-    demo: "#",
   },
 ];
 

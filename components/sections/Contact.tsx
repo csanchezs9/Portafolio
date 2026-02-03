@@ -20,13 +20,13 @@ export default function Contact() {
       icon: Mail,
       label: "Email",
       value: "camilosanchezs288@gmail.com",
-      href: "mailto:camilosanchezs288@gmail.com",
+      href: "mailto:camilosanchezs288@gmail.com?subject=Contacto desde portafolio",
     },
     {
       icon: Phone,
-      label: t.contact.title === "Contacto" ? "Teléfono" : "Phone",
+      label: t.contact.title === "Contacto" ? "WhatsApp" : "WhatsApp",
       value: "+57 317 374 5021",
-      href: "tel:+573173745021",
+      href: "https://wa.me/573173745021?text=Hola%20Camilo%2C%20me%20gustar%C3%ADa%20hablar%20contigo%20sobre...",
     },
     {
       icon: MapPin,
@@ -199,7 +199,7 @@ export default function Contact() {
                     <motion.a
                       key={info.label}
                       href={info.href}
-                      target="_blank"
+                      target={info.href.startsWith("mailto:") ? "_self" : "_blank"}
                       rel="noopener noreferrer"
                       initial={{ opacity: 0, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}

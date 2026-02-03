@@ -123,7 +123,7 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
             <div ref={ctaRef} className="opacity-0">
               <a
-                href="mailto:camilosanchezs288@gmail.com"
+                href="mailto:camilosanchezs288@gmail.com?subject=Contacto desde portafolio"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border-2 border-primary text-primary hover:bg-primary/10 rounded-md font-medium transition-all duration-200 glow-on-hover"
               >
                 <Mail className="w-5 h-5" />

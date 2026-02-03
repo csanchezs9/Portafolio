@@ -1,94 +1,173 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { ArrowDown, Mail } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { Mail, ArrowDown } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import FloatingMacBook from "@/components/FloatingMacBook";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const introRef = useRef<HTMLParagraphElement>(null);
+  const nameRef = useRef<HTMLHeadingElement>(null);
+  const roleRef = useRef<HTMLHeadingElement>(null);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const socialsRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Timeline with delay for intro animation
+      const tl = gsap.timeline({ delay: 2.8 });
+
+      tl.fromTo(
+        introRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" }
+      )
+        .fromTo(
+          nameRef.current,
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
+          "-=0.2"
+        )
+        .fromTo(
+          roleRef.current,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" },
+          "-=0.4"
+        )
+        .fromTo(
+          descriptionRef.current,
+          { opacity: 0, y: 25 },
+          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
+          "-=0.3"
+        )
+        .fromTo(
+          ctaRef.current,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+          "-=0.2"
+        )
+        .fromTo(
+          socialsRef.current,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.5, ease: "power2.out" },
+          "-=0.2"
+        )
+        .fromTo(
+          scrollRef.current,
+          { opacity: 0, y: -10 },
+          { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" },
+          "-=0.2"
+        );
+
+      // Scroll indicator animation
+      gsap.to(scrollRef.current, {
+        y: 8,
+        duration: 1.2,
+        repeat: -1,
+        yoyo: true,
+        ease: "power1.inOut",
+        delay: 4,
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, [t]);
+
   return (
-    <section className="min-h-screen flex items-center justify-center relative px-4">
-      <div className="max-w-4xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
-            Hola, soy Camilo Sanchez
-          </h1>
-        </motion.div>
+    <div
+      ref={sectionRef}
+      className="min-h-screen flex flex-col items-start justify-center relative px-6 md:px-12 lg:px-24 max-w-7xl mx-auto"
+    >
+      {/* Floating MacBook */}
+      <FloatingMacBook />
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-xl md:text-2xl text-muted-foreground mb-8"
+      <div className="max-w-4xl">
+        {/* Small intro text */}
+        <p
+          ref={introRef}
+          className="text-primary text-base md:text-lg font-medium mb-4 opacity-0"
         >
-          Desarrollador Full Stack
-        </motion.p>
+          {t.hero.greeting}
+        </p>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto"
+        {/* Huge name */}
+        <h1
+          ref={nameRef}
+          className="font-heading text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-4 tracking-tight opacity-0 text-foreground leading-none"
         >
-          Especializado en crear experiencias web modernas y escalables.
-        </motion.p>
+          Camilo Sánchez
+        </h1>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="flex gap-4 justify-center flex-wrap"
+        {/* Large role with accent color */}
+        <h2
+          ref={roleRef}
+          className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 tracking-tight opacity-0 text-accent leading-none"
         >
-          <Button size="lg" className="gap-2" asChild>
-            <a href="#contact">
-              <Mail className="w-4 h-4" />
-              Contáctame
+          {t.hero.role}
+        </h2>
+
+        {/* Smaller description */}
+        <p
+          ref={descriptionRef}
+          className="text-base md:text-lg text-muted-foreground mb-10 max-w-2xl leading-relaxed opacity-0"
+        >
+          {t.hero.description}
+        </p>
+
+        {/* CTA and Social */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+          <div ref={ctaRef} className="opacity-0">
+            <a
+              href="mailto:camilosanchezs288@gmail.com"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border-2 border-primary text-primary hover:bg-primary/10 rounded-md font-medium transition-all duration-200 glow-on-hover"
+            >
+              <Mail className="w-5 h-5" />
+              {t.hero.cta}
             </a>
-          </Button>
-          <Button size="lg" variant="outline" className="gap-2" asChild>
-            <a href="#projects">
-              Ver Proyectos
-            </a>
-          </Button>
-        </motion.div>
+          </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="flex gap-4 justify-center mt-8"
-        >
-          <a
-            href="https://github.com/csanchezs9"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 hover:bg-accent rounded-lg transition-colors"
-          >
-            <FaGithub className="w-10 h-10" />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/camilo-sanchez-1349b5338/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2 hover:bg-accent rounded-lg transition-colors"
-          >
-            <FaLinkedin className="w-10 h-10" />
-          </a>
-        </motion.div>
+          <div ref={socialsRef} className="flex gap-4 opacity-0">
+            <a
+              href="https://github.com/csanchezs9"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-200"
+              aria-label="GitHub"
+            >
+              <FaGithub className="w-6 h-6" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/camilo-sanchez-1349b5338/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 text-muted-foreground hover:text-accent hover:bg-accent/10 rounded-lg transition-all duration-200"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedin className="w-6 h-6" />
+            </a>
+          </div>
+        </div>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.6, repeat: Infinity, repeatType: "reverse" }}
-        className="absolute -bottom-8 left-1/2 -translate-x-1/2"
+      {/* Scroll Indicator */}
+      <div
+        ref={scrollRef}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0"
       >
-        <ArrowDown className="w-6 h-6 text-muted-foreground" />
-      </motion.div>
-    </section>
+        <a
+          href="#about"
+          className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group"
+        >
+          <span className="text-xs uppercase tracking-widest">{t.hero.scroll}</span>
+          <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
+        </a>
+      </div>
+    </div>
   );
 }

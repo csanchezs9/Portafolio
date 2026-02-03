@@ -6,26 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { toast } from "sonner";
-
-const contactInfo = [
-  {
-    icon: Mail,
-    title: "Email",
-    value: "camilosanchezs288@gmail.com",
-      
-  },
-  {
-    icon: Phone,
-    title: "Teléfono",
-    value: "+57 317 374 5021",
-  },
-  {
-    icon: MapPin,
-    title: "Ubicación",
-    value: "Medellin, Colombia",
-    href: "https://www.google.com/maps/place/Medell%C3%ADn,+Antioquia/@6.2442034,-75.5812115,12z/data=!3m1!4b1!4m6!3m5!1s0x8e4428dfb80fad05:0x42137cfcc7b53b56",
-  },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -34,6 +15,27 @@ export default function Contact() {
     email: "",
     message: "",
   });
+  const { t } = useLanguage();
+
+  const contactInfo = [
+    {
+      icon: Mail,
+      title: "Email",
+      value: "camilosanchezs288@gmail.com",
+
+    },
+    {
+      icon: Phone,
+      title: t.contact.title === "Contacto" ? "Teléfono" : "Phone",
+      value: "+57 317 374 5021",
+    },
+    {
+      icon: MapPin,
+      title: t.contact.title === "Contacto" ? "Ubicación" : "Location",
+      value: "Medellin, Colombia",
+      href: "https://www.google.com/maps/place/Medell%C3%ADn,+Antioquia/@6.2442034,-75.5812115,12z/data=!3m1!4b1!4m6!3m5!1s0x8e4428dfb80fad05:0x42137cfcc7b53b56",
+    },
+  ];
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -60,18 +62,18 @@ export default function Contact() {
       const data = await response.json();
 
       if (response.ok) {
-        toast.success("¡Mensaje enviado!", {
-          description: "Gracias por contactarme. Te responderé pronto.",
+        toast.success(t.contact.success, {
+          description: t.contact.successDesc,
         });
         setFormData({ name: "", email: "", message: "" });
       } else {
-        toast.error("Error", {
-          description: data.error || "No se pudo enviar el mensaje. Intenta de nuevo.",
+        toast.error(t.contact.error, {
+          description: data.error || t.contact.errorDesc,
         });
       }
     } catch (error) {
-      toast.error("Error", {
-        description: "Hubo un problema al enviar el mensaje. Intenta de nuevo.",
+      toast.error(t.contact.error, {
+        description: t.contact.errorDesc,
       });
     } finally {
       setIsSubmitting(false);
@@ -79,7 +81,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="flex items-center justify-center px-4 py-16">
+    <div className="flex items-center justify-center px-4 py-16">
       <div className="max-w-4xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -88,9 +90,9 @@ export default function Contact() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Contacto</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.contact.title}</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            ¿Tienes un proyecto en mente? No dudes en contactarme
+            {t.contact.subtitle}
           </p>
         </motion.div>
 
@@ -138,7 +140,7 @@ export default function Contact() {
                       htmlFor="name"
                       className="block text-sm font-medium mb-2"
                     >
-                      Nombre
+                      {t.contact.name}
                     </label>
                     <input
                       type="text"
@@ -146,7 +148,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       className="w-full px-4 py-2 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-ring"
-                      placeholder="Tu nombre"
+                      placeholder={t.contact.name}
                       required
                     />
                   </div>
@@ -155,7 +157,7 @@ export default function Contact() {
                       htmlFor="email"
                       className="block text-sm font-medium mb-2"
                     >
-                      Email
+                      {t.contact.email}
                     </label>
                     <input
                       type="email"
@@ -173,7 +175,7 @@ export default function Contact() {
                     htmlFor="message"
                     className="block text-sm font-medium mb-2"
                   >
-                    Mensaje
+                    {t.contact.message}
                   </label>
                   <textarea
                     id="message"
@@ -181,18 +183,18 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     className="w-full px-4 py-2 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-                    placeholder="Tu mensaje..."
+                    placeholder={t.contact.message}
                     required
                   />
                 </div>
                 <Button size="lg" className="w-full" type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? "Enviando..." : "Enviar Mensaje"}
+                  {isSubmitting ? t.contact.sending : t.contact.send}
                 </Button>
               </form>
             </CardContent>
           </Card>
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 }

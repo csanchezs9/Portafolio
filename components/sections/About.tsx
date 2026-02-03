@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   SiNodedotjs,
   SiSupabase,
@@ -15,176 +15,243 @@ import {
   SiNextdotjs,
   SiTypescript,
   SiTailwindcss,
-  SiGit,
-  SiFigma,
   SiDjango,
   SiVite
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
 
-const techCategories = {
-  Frontend: [
-    { name: "React", icon: SiReact, color: "#61DAFB" },
-    { name: "Next.js", icon: SiNextdotjs, color: "#000000" },
-    { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
-    { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
-    { name: "Vite", icon: SiVite, color: "#646CFF" },
-    { name: "TailwindCSS", icon: SiTailwindcss, color: "#06B6D4" },
-    { name: "HTML5", icon: SiHtml5, color: "#E34F26" },
-    { name: "CSS3", icon: SiCss3, color: "#1572B6" },
-  ],
-  Backend: [
-    { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
-    { name: "Express", icon: SiExpress, color: "#000000" },
-    { name: "Python", icon: SiPython, color: "#3776AB" },
-    { name: "Django", icon: SiDjango, color: "#092E20" },
-    { name: "Java", icon: FaJava, color: "#007396" },
-    { name: "Supabase", icon: SiSupabase, color: "#3ECF8E" },
-  ],
-  "Mobile & Tools": [
-    { name: "Flutter", icon: SiFlutter, color: "#02569B" },
-    { name: "Git", icon: SiGit, color: "#F05032" },
-    { name: "Figma", icon: SiFigma, color: "#F24E1E" },
-  ],
-};
+import { useLanguage } from "@/context/LanguageContext";
 
-// Componente de tecnología con efecto magnético
-function TechIcon({ tech, mouseX, mouseY, index }: any) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+function DeviceCard({ device, data, index }: any) {
+  const [isHovered, setIsHovered] = useState(false);
+  const { t } = useLanguage();
 
-  const springConfig = { damping: 15, stiffness: 150 };
-  const x = useSpring(0, springConfig);
-  const y = useSpring(0, springConfig);
-
-  useEffect(() => {
-    const handleMouseMove = () => {
-      if (!ref.current) return;
-
-      const rect = ref.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-
-      const distanceX = mouseX.get() - centerX;
-      const distanceY = mouseY.get() - centerY;
-
-      const distance = Math.sqrt(distanceX ** 2 + distanceY ** 2);
-      const maxDistance = 200;
-
-      if (distance < maxDistance) {
-        const force = (maxDistance - distance) / maxDistance;
-        x.set(distanceX * force * 0.3);
-        y.set(distanceY * force * 0.3);
-      } else {
-        x.set(0);
-        y.set(0);
-      }
-    };
-
-    const unsubscribeX = mouseX.on("change", handleMouseMove);
-    const unsubscribeY = mouseY.on("change", handleMouseMove);
-
-    return () => {
-      unsubscribeX();
-      unsubscribeY();
-    };
-  }, [mouseX, mouseY, x, y]);
+  const renderDevice = () => {
+    if (device === "laptop") {
+      return (
+        <svg viewBox="0 0 200 150" className="w-full h-auto">
+          {/* Laptop screen */}
+          <rect x="30" y="20" width="140" height="90" rx="4" fill="currentColor" opacity="0.1" stroke="currentColor" strokeWidth="2" />
+          <rect x="35" y="25" width="130" height="80" rx="2" fill="currentColor" opacity="0.05" />
+          {/* Laptop base */}
+          <path d="M20 110 L180 110 L190 120 L10 120 Z" fill="currentColor" opacity="0.1" stroke="currentColor" strokeWidth="2" />
+        </svg>
+      );
+    } else if (device === "mobile") {
+      return (
+        <svg viewBox="0 0 200 150" className="w-full h-auto">
+          {/* Mobile phone */}
+          <rect x="70" y="15" width="60" height="120" rx="8" fill="currentColor" opacity="0.1" stroke="currentColor" strokeWidth="2" />
+          <rect x="75" y="25" width="50" height="100" rx="2" fill="currentColor" opacity="0.05" />
+          {/* Home button */}
+          <circle cx="100" cy="130" r="3" fill="currentColor" opacity="0.2" />
+        </svg>
+      );
+    } else {
+      return (
+        <svg viewBox="0 0 200 150" className="w-full h-auto">
+          {/* Server rack */}
+          <rect x="40" y="30" width="120" height="25" rx="3" fill="currentColor" opacity="0.1" stroke="currentColor" strokeWidth="2" />
+          <rect x="40" y="60" width="120" height="25" rx="3" fill="currentColor" opacity="0.1" stroke="currentColor" strokeWidth="2" />
+          <rect x="40" y="90" width="120" height="25" rx="3" fill="currentColor" opacity="0.1" stroke="currentColor" strokeWidth="2" />
+          {/* Server lights */}
+          <circle cx="50" cy="42" r="2" fill="#22c55e" />
+          <circle cx="58" cy="42" r="2" fill="#22c55e" />
+          <circle cx="50" cy="72" r="2" fill="#22c55e" />
+          <circle cx="58" cy="72" r="2" fill="#eab308" />
+          <circle cx="50" cy="102" r="2" fill="#22c55e" />
+          <circle cx="58" cy="102" r="2" fill="#22c55e" />
+        </svg>
+      );
+    }
+  };
 
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, scale: 0 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.4, delay: index * 0.03 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.2 }}
       viewport={{ once: true }}
-      style={{ x, y }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       className="relative group"
     >
-      <motion.div
-        whileHover={{ scale: 1.15 }}
-        className="flex flex-col items-center gap-3 p-6 rounded-xl bg-card border border-border/50 hover:border-primary/50 transition-colors cursor-pointer backdrop-blur-sm"
-      >
-        <tech.icon
-          className="w-14 h-14 md:w-16 md:h-16 transition-all"
-          style={{ color: tech.color }}
-        />
-        <span className="text-sm font-medium text-center opacity-0 group-hover:opacity-100 transition-opacity">
-          {tech.name}
-        </span>
-      </motion.div>
+      <div className="relative bg-card border border-border/50 rounded-2xl p-8 hover:border-primary/50 transition-all duration-300 overflow-hidden">
+        {/* Device illustration */}
+        <div className="mb-6 text-foreground">
+          {renderDevice()}
+        </div>
+
+        {/* Title */}
+        <h3 className="text-xl font-heading font-bold text-center mb-6 text-primary">
+          {data.title}
+        </h3>
+
+        {/* Tech icons - appear on hover */}
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{
+            opacity: isHovered ? 1 : 0,
+            height: isHovered ? "auto" : 0
+          }}
+          transition={{ duration: 0.3 }}
+          className="grid grid-cols-4 gap-4 overflow-hidden"
+        >
+          {data.techs.map((tech: any, idx: number) => (
+            <motion.div
+              key={tech.name}
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{
+                scale: isHovered ? 1 : 0,
+                opacity: isHovered ? 1 : 0
+              }}
+              transition={{
+                duration: 0.3,
+                delay: isHovered ? idx * 0.05 : 0
+              }}
+              className="flex flex-col items-center gap-2 p-3 rounded-lg bg-background/50 hover:bg-background transition-colors"
+            >
+              <tech.icon
+                className="w-8 h-8"
+                style={{ color: tech.color }}
+              />
+              <span className="text-xs font-medium text-center text-muted-foreground">
+                {tech.name}
+              </span>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Hover hint */}
+        {!isHovered && (
+          <motion.p
+            initial={{ opacity: 1 }}
+            animate={{ opacity: isHovered ? 0 : 1 }}
+            className="text-sm text-muted-foreground text-center mt-4"
+          >
+            {t.about.viewTech}
+          </motion.p>
+        )}
+      </div>
     </motion.div>
   );
 }
 
 export default function About() {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+  const { t } = useLanguage();
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
+  const techByDevice = {
+    laptop: {
+      title: t.about.techTitles.laptop,
+      techs: [
+        { name: "React", icon: SiReact, color: "#61DAFB" },
+        { name: "Next.js", icon: SiNextdotjs, color: "#000000" },
+        { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+        { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
+        { name: "Vite", icon: SiVite, color: "#646CFF" },
+        { name: "TailwindCSS", icon: SiTailwindcss, color: "#06B6D4" },
+        { name: "HTML5", icon: SiHtml5, color: "#E34F26" },
+        { name: "CSS3", icon: SiCss3, color: "#1572B6" },
+      ],
+    },
+    mobile: {
+      title: t.about.techTitles.mobile,
+      techs: [
+        { name: "Flutter", icon: SiFlutter, color: "#02569B" },
+      ],
+    },
+    server: {
+      title: t.about.techTitles.server,
+      techs: [
+        { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
+        { name: "Express", icon: SiExpress, color: "#000000" },
+        { name: "Python", icon: SiPython, color: "#3776AB" },
+        { name: "Django", icon: SiDjango, color: "#092E20" },
+        { name: "Java", icon: FaJava, color: "#007396" },
+        { name: "Supabase", icon: SiSupabase, color: "#3ECF8E" },
+      ],
+    },
+  };
 
   return (
-    <section id="about" className="flex items-center justify-center px-4 py-16">
+    <div className="flex items-center justify-center px-4 py-16">
       <div className="max-w-7xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Sobre mi
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-4">
-            Hola soy Camilo Sanchez, desarrollador full-stack en formación que combina lo técnico con lo creativo. 
-            Me apasiona entender cómo funcionan las cosas, construir soluciones claras y cuidar cada detalle del diseño y la experiencia.
-            Disfruto aprender, experimentar y mejorar mis proyectos hasta que se sientan fluidos, funcionales y estéticamente coherentes.
-          </p>
-          
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8 max-w-3xl">
+            <h2 className="text-4xl md:text-5xl font-heading font-bold">
+              {t.about.title}
+            </h2>
+            {/* SOON Placeholder */}
+            <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border-2 border-dashed border-muted-foreground/30 flex items-center justify-center bg-muted/20 relative overflow-hidden group">
+              <span className="text-xs font-bold text-muted-foreground group-hover:scale-110 transition-transform">
+                {t.about.soon}
+              </span>
+            </div>
+          </div>
+
+          {/* Intro paragraph - left aligned */}
+          <div className="text-lg text-muted-foreground max-w-3xl space-y-4 text-left mb-12">
+            <p>
+              {t.about.intro1}
+            </p>
+            <p>
+              {t.about.intro2}
+            </p>
+          </div>
+
+          {/* Educational background */}
+          <div className="max-w-3xl">
+            <h3 className="text-xl font-heading font-semibold mb-6 text-foreground">
+              {t.about.eduTitle}
+            </h3>
+            <div className="space-y-4 text-muted-foreground">
+              <div className="flex items-start gap-4 p-4 rounded-lg bg-card border border-border/50">
+                <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+                <div>
+                  <h4 className="font-semibold text-foreground mb-1">
+                    {t.about.edu1Title}
+                  </h4>
+                  <p className="text-sm text-primary font-medium mb-1">Universidad EAFIT</p>
+                  <p className="text-sm">
+                    {t.about.edu1Desc}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 p-4 rounded-lg bg-card border border-border/50">
+                <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0"></div>
+                <div>
+                  <h4 className="font-semibold text-foreground mb-1">
+                    {t.about.edu2Title}
+                  </h4>
+                  <p className="text-sm text-accent font-medium mb-1">English Proficiency</p>
+                  <p className="text-sm">
+                    {t.about.edu2Desc}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
-        {/* Grid de tecnologías con efecto magnético por categorías */}
-        <div className="space-y-12">
-          {Object.entries(techCategories).map(([category, techs], categoryIndex) => (
-            <motion.div
-              key={category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
-              viewport={{ once: true }}
-            >
-              {/* Título de categoría */}
-              <div className="flex items-center gap-4 mb-6">
-                <h3 className="text-xl md:text-2xl font-bold text-primary">
-                  {category}
-                </h3>
-                <div className="flex-1 h-px bg-gradient-to-r from-primary/50 to-transparent"></div>
-              </div>
-
-              {/* Grid de íconos */}
-              <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 md:gap-6">
-                {techs.map((tech, index) => (
-                  <TechIcon
-                    key={tech.name}
-                    tech={tech}
-                    mouseX={mouseX}
-                    mouseY={mouseY}
-                    index={index}
-                  />
-                ))}
-              </div>
-            </motion.div>
+        {/* Device-based tech stack */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+          {Object.entries(techByDevice).map(([device, data], index) => (
+            <DeviceCard
+              key={device}
+              device={device}
+              data={data}
+              index={index}
+            />
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

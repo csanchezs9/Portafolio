@@ -26,6 +26,7 @@ interface Translations {
         edu1Desc: string;
         edu2Title: string;
         edu2Desc: string;
+        techTitle: string;
         viewTech: string;
         soon: string;
         techTitles: {
@@ -95,6 +96,7 @@ const translations: Record<Language, Translations> = {
             edu2Title: "IELTS B2 Certification",
             edu2Desc:
                 "Certification that allows me to collaborate in international teams and stay updated with global technical documentation.",
+            techTitle: "Technologies I've worked with.",
             viewTech: "explore",
             soon: "SOON",
             techTitles: {
@@ -180,6 +182,7 @@ const translations: Record<Language, Translations> = {
             edu2Title: "Certificación IELTS B2",
             edu2Desc:
                 "Certificación que me permite colaborar en equipos internacionales y mantenerme actualizado con la documentación técnica global.",
+            techTitle: "Tecnologías con las que he trabajado.",
             viewTech: "explora",
             soon: "PRONTO",
             techTitles: {

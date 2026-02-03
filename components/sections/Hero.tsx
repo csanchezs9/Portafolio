@@ -168,7 +168,7 @@ export default function Hero() {
       {/* Scroll Indicator */}
       <div
         ref={scrollRef}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0"
+        className="absolute bottom-2 lg:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-0"
       >
         <a
           href="#about"

@@ -257,17 +257,30 @@ export default function About() {
           </div>
         </motion.div>
 
-        {/* Device-based tech stack */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-          {Object.entries(techByDevice).map(([device, data], index) => (
-            <DeviceCard
-              key={device}
-              device={device}
-              data={data}
-              index={index}
-            />
-          ))}
-        </div>
+        {/* Technologies section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="mt-16"
+        >
+          <h3 className="text-xl font-heading font-semibold mb-8 text-foreground">
+            {t.about.techTitle}
+          </h3>
+
+          {/* Device-based tech stack */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {Object.entries(techByDevice).map(([device, data], index) => (
+              <DeviceCard
+                key={device}
+                device={device}
+                data={data}
+                index={index}
+              />
+            ))}
+          </div>
+        </motion.div>
       </div>
     </div>
   );

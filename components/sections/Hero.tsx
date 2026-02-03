@@ -84,9 +84,9 @@ export default function Hero() {
       ref={sectionRef}
       className="min-h-screen flex flex-col items-center justify-center relative px-6 md:px-12 lg:px-24 max-w-7xl mx-auto py-20 lg:py-0"
     >
-      <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+      <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
         {/* Left side - Text content */}
-        <div className="w-full lg:max-w-3xl order-2 lg:order-1">
+        <div className="w-full lg:flex-1 lg:min-w-0 order-2 lg:order-1">
           {/* Small intro text */}
           <p
             ref={introRef}
@@ -155,7 +155,12 @@ export default function Hero() {
         </div>
 
         {/* Right side - Floating MacBook */}
-        <div className="w-full lg:w-auto order-1 lg:order-2 flex justify-center lg:justify-end">
+        <div
+          className="order-1 lg:order-2 flex-shrink-0"
+          style={{
+            width: 'min(85vw, 500px)',
+          }}
+        >
           <FloatingMacBook />
         </div>
       </div>

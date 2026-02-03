@@ -31,8 +31,7 @@ export default function FloatingMacBook() {
     return (
         <div
             ref={macbookRef}
-            className="w-full max-w-xs md:max-w-sm lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:max-w-none opacity-90 mx-auto lg:mx-0"
-            style={{ width: "auto", maxWidth: "100%", height: "auto" }}
+            className="w-full opacity-90"
         >
             <svg
                 viewBox="0 0 500 350"

@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import Footer from "@/components/Footer";
 import IntroWrapper from "@/components/IntroWrapper";
 import { LanguageProvider } from "@/context/LanguageContext";
 
@@ -39,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="scroll-smooth" suppressHydrationWarning>
-      <body className={`${inter.variable} ${sora.variable} font-sans`}>
+      <body className={`${inter.variable} ${sora.variable} font-sans`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -50,6 +51,7 @@ export default function RootLayout({
             <IntroWrapper>
               <Navbar />
               {children}
+              <Footer />
               <Toaster />
             </IntroWrapper>
           </LanguageProvider>

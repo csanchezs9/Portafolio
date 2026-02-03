@@ -52,20 +52,10 @@ export default function SectionIndicator() {
                             {/* Line indicator */}
                             <span
                                 className={`h-px transition-all ${activeSection === section.id
-                                        ? "w-16 bg-foreground"
-                                        : "w-8 bg-muted-foreground/40 group-hover:w-12 group-hover:bg-foreground/60"
+                                    ? "w-16 bg-foreground"
+                                    : "w-8 bg-muted-foreground/40 group-hover:w-12 group-hover:bg-foreground/60"
                                     }`}
                             />
-
-                            {/* Section name - only visible on hover or when active */}
-                            <span
-                                className={`text-xs font-medium uppercase tracking-widest transition-all ${activeSection === section.id
-                                        ? "opacity-100 text-foreground"
-                                        : "opacity-0 text-muted-foreground group-hover:opacity-100"
-                                    }`}
-                            >
-                                {section.name}
-                            </span>
                         </button>
                     </li>
                 ))}

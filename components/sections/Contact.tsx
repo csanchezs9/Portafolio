@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { toast } from "sonner";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -20,20 +18,21 @@ export default function Contact() {
   const contactInfo = [
     {
       icon: Mail,
-      title: "Email",
+      label: "Email",
       value: "camilosanchezs288@gmail.com",
-
+      href: "mailto:camilosanchezs288@gmail.com",
     },
     {
       icon: Phone,
-      title: t.contact.title === "Contacto" ? "Teléfono" : "Phone",
+      label: t.contact.title === "Contacto" ? "Teléfono" : "Phone",
       value: "+57 317 374 5021",
+      href: "tel:+573173745021",
     },
     {
       icon: MapPin,
-      title: t.contact.title === "Contacto" ? "Ubicación" : "Location",
-      value: "Medellin, Colombia",
-      href: "https://www.google.com/maps/place/Medell%C3%ADn,+Antioquia/@6.2442034,-75.5812115,12z/data=!3m1!4b1!4m6!3m5!1s0x8e4428dfb80fad05:0x42137cfcc7b53b56",
+      label: t.contact.title === "Contacto" ? "Ubicación" : "Location",
+      value: "Medellín, Colombia",
+      href: "https://www.google.com/maps/place/Medell%C3%ADn,+Antioquia/@6.2442034,-75.5812115,12z",
     },
   ];
 
@@ -82,118 +81,159 @@ export default function Contact() {
 
   return (
     <div className="flex items-center justify-center px-4 py-16">
-      <div className="max-w-4xl mx-auto w-full">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">{t.contact.title}</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t.contact.subtitle}
-          </p>
-        </motion.div>
+      <div className="max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+          {/* Left Side - Form */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="lg:col-span-3"
+          >
+            {/* Huge Heading */}
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-12 leading-tight">
+              {t.contact.title === "Contacto"
+                ? "Hablemos de tu próximo proyecto"
+                : "Let's build something great together"}
+            </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {contactInfo.map((info, index) => (
-            <motion.div
-              key={info.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Card className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <info.icon className="w-8 h-8 mx-auto mb-4 text-primary" />
-                  <h3 className="font-semibold mb-2">{info.title}</h3>
-                  {info.href ? (
-                    <a
-                      href={info.href}
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      {info.value}
-                    </a>
-                  ) : (
-                    <p className="text-muted-foreground">{info.value}</p>
-                  )}
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+            {/* Minimal Form */}
+            <form onSubmit={handleSubmit} className="space-y-8">
+              {/* Name Input */}
+              <div className="relative">
+                <label
+                  htmlFor="name"
+                  className="block text-xs uppercase tracking-wider text-muted-foreground mb-3"
+                >
+                  01 — {t.contact.name}
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full bg-transparent border-0 border-b-2 border-border/30 focus:border-primary pb-3 text-lg outline-none transition-colors placeholder:text-muted-foreground/40"
+                  placeholder="John Doe"
+                  required
+                />
+              </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          viewport={{ once: true }}
-        >
-          <Card>
-            <CardContent className="p-8">
-              <form className="space-y-6" onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      {t.contact.name}
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-ring"
-                      placeholder={t.contact.name}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-sm font-medium mb-2"
-                    >
-                      {t.contact.email}
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-ring"
-                      placeholder="tu@email.com"
-                      required
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-sm font-medium mb-2"
-                  >
-                    {t.contact.message}
-                  </label>
+              {/* Email Input */}
+              <div className="relative">
+                <label
+                  htmlFor="email"
+                  className="block text-xs uppercase tracking-wider text-muted-foreground mb-3"
+                >
+                  02 — {t.contact.email}
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full bg-transparent border-0 border-b-2 border-border/30 focus:border-primary pb-3 text-lg outline-none transition-colors placeholder:text-muted-foreground/40"
+                  placeholder="john@example.com"
+                  required
+                />
+              </div>
+
+              {/* Message Input */}
+              <div className="relative">
+                <label
+                  htmlFor="message"
+                  className="block text-xs uppercase tracking-wider text-muted-foreground mb-3"
+                >
+                  03 — {t.contact.message}
+                </label>
+                <div className="border-b-2 border-border/30 focus-within:border-primary transition-colors pb-3">
                   <textarea
                     id="message"
-                    rows={5}
+                    rows={1}
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 rounded-md border bg-background focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+                    className="w-full bg-transparent border-0 text-lg outline-none resize-none placeholder:text-muted-foreground/40"
                     placeholder={t.contact.message}
                     required
                   />
                 </div>
-                <Button size="lg" className="w-full" type="submit" disabled={isSubmitting}>
+              </div>
+
+              {/* Submit Button */}
+              <motion.button
+                type="submit"
+                disabled={isSubmitting}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="group relative px-8 py-4 bg-primary text-primary-foreground rounded-full font-semibold text-lg overflow-hidden shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-3"
+              >
+                <span className="relative z-10">
                   {isSubmitting ? t.contact.sending : t.contact.send}
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
-        </motion.div>
+                </span>
+                <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity" />
+              </motion.button>
+            </form>
+          </motion.div>
+
+          {/* Right Side - Contact Info Card */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="lg:col-span-2"
+          >
+            <div className="sticky top-24">
+              {/* Glassmorphism Card */}
+              <div className="relative rounded-2xl bg-card/30 backdrop-blur-xl border border-border/20 p-8 shadow-2xl">
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-accent/5 pointer-events-none" />
+
+                <div className="relative space-y-6">
+                  <h3 className="text-2xl font-heading font-bold mb-8">
+                    {t.contact.title === "Contacto" ? "Información de contacto" : "Contact Information"}
+                  </h3>
+
+                  {contactInfo.map((info, index) => (
+                    <motion.a
+                      key={info.label}
+                      href={info.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+                      viewport={{ once: true }}
+                      className="group flex items-start gap-4 p-4 rounded-xl hover:bg-primary/5 transition-all duration-300"
+                    >
+                      <div className="p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                        <info.icon className="w-5 h-5" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1">
+                          {info.label}
+                        </p>
+                        <p className="text-sm font-medium group-hover:text-primary transition-colors">
+                          {info.value}
+                        </p>
+                      </div>
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Decorative Element */}
+              <div className="mt-8 text-center">
+                <p className="text-sm text-muted-foreground">
+                  {t.contact.title === "Contacto"
+                    ? "Respondo en menos de 24 horas"
+                    : "I respond within 24 hours"}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );

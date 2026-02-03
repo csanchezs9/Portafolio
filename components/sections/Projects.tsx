@@ -45,7 +45,13 @@ const projectsData = [
     tags: ["Node.js", "Express", "Puppeteer", "Shopify API", "HTML", "CSS", "JavaScript", "CORS", "node-fetch", "pkg"],
     github: "https://github.com/csanchezs9/infinito",
     pdf: "/catalogo-infinito-topos.pdf",
-    demo: "https://infinitopiercing.com",
+  },
+  {
+    key: "snake3d",
+    tags: ["Three.js", "JavaScript", "HTML5", "CSS3", "3D Graphics"],
+    github: "https://github.com/csanchezs9/snake3d",
+    demo: "https://snake3d-blond.vercel.app/",
+    forFun: true,
   },
 ];
 
@@ -74,6 +80,8 @@ export default function Projects() {
           {projectsData.map((project, index) => {
             // @ts-ignore
             const item = t.projects.items[project.key];
+            // @ts-ignore
+            const isForFun = project.forFun;
             return (
               <motion.div
                 key={project.key}
@@ -82,9 +90,19 @@ export default function Projects() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="h-full flex flex-col hover:shadow-lg transition-shadow">
+                <Card className={`h-full flex flex-col hover:shadow-lg transition-all ${isForFun
+                  ? "border-2 border-dashed border-primary/50 hover:border-primary bg-gradient-to-br from-primary/5 to-accent/5"
+                  : ""
+                  }`}>
                   <CardHeader>
-                    <CardTitle className="mb-2">{item.title}</CardTitle>
+                    <div className="flex items-start justify-between gap-2">
+                      <CardTitle className="mb-2">{item.title}</CardTitle>
+                      {isForFun && (
+                        <span className="px-2 py-1 bg-orange-500 text-white text-xs font-bold rounded-md whitespace-nowrap">
+                          FOR FUN!
+                        </span>
+                      )}
+                    </div>
                     <CardDescription>{item.desc}</CardDescription>
                   </CardHeader>
                   <CardContent className="flex-grow">
@@ -92,7 +110,10 @@ export default function Projects() {
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm"
+                          className={`px-3 py-1 rounded-full text-sm ${isForFun
+                            ? "bg-primary/10 text-primary border border-primary/20"
+                            : "bg-secondary text-secondary-foreground"
+                            }`}
                         >
                           {tag}
                         </span>

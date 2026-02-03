@@ -183,58 +183,65 @@ export default function About() {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8 max-w-3xl">
-            <h2 className="text-4xl md:text-5xl font-heading font-bold">
-              {t.about.title}
-            </h2>
-            {/* SOON Placeholder */}
-            <div className="w-24 h-24 md:w-32 md:h-32 rounded-full border-2 border-dashed border-muted-foreground/30 flex items-center justify-center bg-muted/20 relative overflow-hidden group">
-              <span className="text-xs font-bold text-muted-foreground group-hover:scale-110 transition-transform">
-                {t.about.soon}
-              </span>
-            </div>
-          </div>
+          {/* Two column layout: content on left, image placeholder on right */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* Left column - Content */}
+            <div className="space-y-8">
+              <h2 className="text-4xl md:text-5xl font-heading font-bold">
+                {t.about.title}
+              </h2>
 
-          {/* Intro paragraph - left aligned */}
-          <div className="text-lg text-muted-foreground max-w-3xl space-y-4 text-left mb-12">
-            <p>
-              {t.about.intro1}
-            </p>
-            <p>
-              {t.about.intro2}
-            </p>
-          </div>
-
-          {/* Educational background */}
-          <div className="max-w-3xl">
-            <h3 className="text-xl font-heading font-semibold mb-6 text-foreground">
-              {t.about.eduTitle}
-            </h3>
-            <div className="space-y-4 text-muted-foreground">
-              <div className="flex items-start gap-4 p-4 rounded-lg bg-card border border-border/50">
-                <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-                <div>
-                  <h4 className="font-semibold text-foreground mb-1">
-                    {t.about.edu1Title}
-                  </h4>
-                  <p className="text-sm text-primary font-medium mb-1">Universidad EAFIT</p>
-                  <p className="text-sm">
-                    {t.about.edu1Desc}
-                  </p>
-                </div>
+              {/* Intro paragraph */}
+              <div className="text-lg text-muted-foreground space-y-4 text-left">
+                <p>
+                  {t.about.intro1}
+                </p>
+                <p>
+                  {t.about.intro2}
+                </p>
               </div>
 
-              <div className="flex items-start gap-4 p-4 rounded-lg bg-card border border-border/50">
-                <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0"></div>
-                <div>
-                  <h4 className="font-semibold text-foreground mb-1">
-                    {t.about.edu2Title}
-                  </h4>
-                  <p className="text-sm text-accent font-medium mb-1">English Proficiency</p>
-                  <p className="text-sm">
-                    {t.about.edu2Desc}
-                  </p>
+              {/* Educational background */}
+              <div>
+                <h3 className="text-xl font-heading font-semibold mb-6 text-foreground">
+                  {t.about.eduTitle}
+                </h3>
+                <div className="space-y-4 text-muted-foreground">
+                  <div className="flex items-start gap-4 p-4 rounded-lg bg-card border border-border/50">
+                    <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+                    <div>
+                      <h4 className="font-semibold text-foreground mb-1">
+                        {t.about.edu1Title}
+                      </h4>
+                      <p className="text-sm text-primary font-medium mb-1">Universidad EAFIT</p>
+                      <p className="text-sm">
+                        {t.about.edu1Desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4 p-4 rounded-lg bg-card border border-border/50">
+                    <div className="w-2 h-2 rounded-full bg-accent mt-2 flex-shrink-0"></div>
+                    <div>
+                      <h4 className="font-semibold text-foreground mb-1">
+                        {t.about.edu2Title}
+                      </h4>
+                      <p className="text-sm text-accent font-medium mb-1">English Proficiency</p>
+                      <p className="text-sm">
+                        {t.about.edu2Desc}
+                      </p>
+                    </div>
+                  </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Right column - SOON Placeholder (centered) */}
+            <div className="flex items-center justify-center">
+              <div className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full border-2 border-dashed border-muted-foreground/30 flex items-center justify-center bg-muted/20 relative overflow-hidden group">
+                <span className="text-sm md:text-base font-bold text-muted-foreground group-hover:scale-110 transition-transform">
+                  {t.about.soon}
+                </span>
               </div>
             </div>
           </div>

@@ -46,6 +46,7 @@ interface Translations {
             whatsapp: { title: string; desc: string };
             dap: { title: string; desc: string };
             infinito: { title: string; desc: string };
+            snake3d: { title: string; desc: string };
         };
     };
     contact: {
@@ -129,6 +130,10 @@ const translations: Record<Language, Translations> = {
                     title: "Infinito Piercing - PDF Generator",
                     desc: "Automated system generating professional PDF catalogs with real-time products from Shopify API. Allows selecting collections (Ear, Nose, Body, etc.) and downloading ready-to-print A4 catalogs with minimalist black and white design.",
                 },
+                snake3d: {
+                    title: "🎮 Snake 3D Game",
+                    desc: "A fun 3D twist on the classic Snake game! Built with Three.js for 3D graphics and smooth animations. Navigate the snake in a 3D environment, collect food, and try not to crash. Just a fun side project to experiment with 3D web graphics! 🐍",
+                },
             },
         },
         contact: {
@@ -209,6 +214,10 @@ const translations: Record<Language, Translations> = {
                 infinito: {
                     title: "Infinito Piercing - Generador de Catálogos PDF",
                     desc: "Sistema automatizado que genera catálogos PDF profesionales con productos en tiempo real desde la API de Shopify. Permite seleccionar diferentes colecciones (Oreja, Nariz, Corporal, etc.) y descargar catálogos listos para imprimir en formato A4 con diseño minimalista blanco y negro.",
+                },
+                snake3d: {
+                    title: "🎮 Juego Snake 3D",
+                    desc: "¡Un giro divertido en 3D del clásico juego Snake! Construido con Three.js para gráficos 3D y animaciones suaves. Navega la serpiente en un entorno 3D, recoge comida y trata de no chocar. ¡Solo un proyecto divertido para experimentar con gráficos web 3D! 🐍",
                 },
             },
         },

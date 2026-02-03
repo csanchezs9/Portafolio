@@ -77,81 +77,86 @@ export default function Hero() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [t]);
+  }, []); // Only run animation once on mount
 
   return (
     <div
       ref={sectionRef}
-      className="min-h-screen flex flex-col items-start justify-center relative px-6 md:px-12 lg:px-24 max-w-7xl mx-auto"
+      className="min-h-screen flex flex-col items-center justify-center relative px-6 md:px-12 lg:px-24 max-w-7xl mx-auto py-20 lg:py-0"
     >
-      {/* Floating MacBook */}
-      <FloatingMacBook />
+      <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+        {/* Left side - Text content */}
+        <div className="w-full lg:max-w-3xl order-2 lg:order-1">
+          {/* Small intro text */}
+          <p
+            ref={introRef}
+            className="text-primary text-base md:text-lg font-medium mb-3 opacity-0"
+          >
+            {t.hero.greeting}
+          </p>
 
-      <div className="max-w-4xl">
-        {/* Small intro text */}
-        <p
-          ref={introRef}
-          className="text-primary text-base md:text-lg font-medium mb-4 opacity-0"
-        >
-          {t.hero.greeting}
-        </p>
+          {/* Huge name */}
+          <h1
+            ref={nameRef}
+            className="font-heading text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-3 tracking-tight opacity-0 text-foreground leading-none"
+          >
+            Camilo Sánchez
+          </h1>
 
-        {/* Huge name */}
-        <h1
-          ref={nameRef}
-          className="font-heading text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-4 tracking-tight opacity-0 text-foreground leading-none"
-        >
-          Camilo Sánchez
-        </h1>
+          {/* Large role with accent color */}
+          <h2
+            ref={roleRef}
+            className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 tracking-tight opacity-0 text-accent leading-none"
+          >
+            {t.hero.role}
+          </h2>
 
-        {/* Large role with accent color */}
-        <h2
-          ref={roleRef}
-          className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 tracking-tight opacity-0 text-accent leading-none"
-        >
-          {t.hero.role}
-        </h2>
+          {/* Smaller description */}
+          <p
+            ref={descriptionRef}
+            className="text-base md:text-lg text-muted-foreground mb-8 max-w-2xl leading-relaxed opacity-0"
+          >
+            {t.hero.description}
+          </p>
 
-        {/* Smaller description */}
-        <p
-          ref={descriptionRef}
-          className="text-base md:text-lg text-muted-foreground mb-10 max-w-2xl leading-relaxed opacity-0"
-        >
-          {t.hero.description}
-        </p>
+          {/* CTA and Social */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <div ref={ctaRef} className="opacity-0">
+              <a
+                href="mailto:camilosanchezs288@gmail.com"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border-2 border-primary text-primary hover:bg-primary/10 rounded-md font-medium transition-all duration-200 glow-on-hover"
+              >
+                <Mail className="w-5 h-5" />
+                {t.hero.cta}
+              </a>
+            </div>
 
-        {/* CTA and Social */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-          <div ref={ctaRef} className="opacity-0">
-            <a
-              href="mailto:camilosanchezs288@gmail.com"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border-2 border-primary text-primary hover:bg-primary/10 rounded-md font-medium transition-all duration-200 glow-on-hover"
-            >
-              <Mail className="w-5 h-5" />
-              {t.hero.cta}
-            </a>
+            <div ref={socialsRef} className="flex gap-4 opacity-0">
+              <a
+                href="https://github.com/csanchezs9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-200"
+                aria-label="GitHub"
+              >
+                <FaGithub className="w-6 h-6" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/camilo-sanchez-1349b5338/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 text-muted-foreground hover:text-accent hover:bg-accent/10 rounded-lg transition-all duration-200"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin className="w-6 h-6" />
+              </a>
+            </div>
           </div>
+        </div>
 
-          <div ref={socialsRef} className="flex gap-4 opacity-0">
-            <a
-              href="https://github.com/csanchezs9"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 text-muted-foreground hover:text-primary hover:bg-primary/10 rounded-lg transition-all duration-200"
-              aria-label="GitHub"
-            >
-              <FaGithub className="w-6 h-6" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/camilo-sanchez-1349b5338/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 text-muted-foreground hover:text-accent hover:bg-accent/10 rounded-lg transition-all duration-200"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin className="w-6 h-6" />
-            </a>
-          </div>
+        {/* Right side - Floating MacBook */}
+        <div className="w-full lg:w-auto order-1 lg:order-2 flex justify-center lg:justify-end">
+          <FloatingMacBook />
         </div>
       </div>
 

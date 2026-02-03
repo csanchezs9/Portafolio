@@ -51,6 +51,7 @@ const projectsData = [
     tags: ["Three.js", "JavaScript", "HTML5", "CSS3", "3D Graphics"],
     github: "https://github.com/csanchezs9/snake3d",
     demo: "https://snake3d-blond.vercel.app/",
+    preview: "https://snake3d-blond.vercel.app/",
     forFun: true,
   },
 ];
@@ -94,6 +95,29 @@ export default function Projects() {
                   ? "border-2 border-dashed border-primary/50 hover:border-primary bg-gradient-to-br from-primary/5 to-accent/5"
                   : ""
                   }`}>
+                  {/* Preview image for projects with preview property */}
+                  {/* @ts-ignore */}
+                  {project.preview && (
+                    <a
+                      href={project.demo as string}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full h-48 overflow-hidden rounded-t-lg bg-gradient-to-br from-green-500/20 to-blue-500/20 relative group"
+                    >
+                      <img
+                        src="/snake3d-preview.png"
+                        alt="Snake 3D Game Preview"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <div className="text-center">
+                          <div className="text-sm font-semibold text-primary">
+                            Click to Play →
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  )}
                   <CardHeader>
                     <div className="flex items-start justify-between gap-2">
                       <CardTitle className="mb-2">{item.title}</CardTitle>

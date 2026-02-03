@@ -132,7 +132,7 @@ const translations: Record<Language, Translations> = {
                 },
                 snake3d: {
                     title: "🎮 Snake 3D Game",
-                    desc: "A fun 3D twist on the classic Snake game! Built with Three.js for 3D graphics and smooth animations. Navigate the snake in a 3D environment, collect food, and try not to crash. Just a fun side project to experiment with 3D web graphics! 🐍",
+                    desc: "Classic Snake game reimagined in 3D! Built with Three.js for smooth 3D graphics and gameplay.",
                 },
             },
         },
@@ -217,7 +217,7 @@ const translations: Record<Language, Translations> = {
                 },
                 snake3d: {
                     title: "🎮 Juego Snake 3D",
-                    desc: "¡Un giro divertido en 3D del clásico juego Snake! Construido con Three.js para gráficos 3D y animaciones suaves. Navega la serpiente en un entorno 3D, recoge comida y trata de no chocar. ¡Solo un proyecto divertido para experimentar con gráficos web 3D! 🐍",
+                    desc: "¡El clásico juego Snake reimaginado en 3D! Construido con Three.js para gráficos y jugabilidad 3D fluida.",
                 },
             },
         },

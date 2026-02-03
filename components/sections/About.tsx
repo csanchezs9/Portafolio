@@ -183,14 +183,24 @@ export default function About() {
           viewport={{ once: true }}
           className="mb-16"
         >
-          {/* Two column layout: content on left, image placeholder on right */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Title */}
+          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-8">
+            {t.about.title}
+          </h2>
+
+          {/* SOON Placeholder - Shows on mobile only, right after title */}
+          <div className="flex items-center justify-center mb-8 md:hidden">
+            <div className="w-32 h-32 rounded-full border-2 border-dashed border-muted-foreground/30 flex items-center justify-center bg-muted/20 relative overflow-hidden group">
+              <span className="text-sm font-bold text-muted-foreground group-hover:scale-110 transition-transform">
+                {t.about.soon}
+              </span>
+            </div>
+          </div>
+
+          {/* Two column layout: content on left, image placeholder on right (desktop only) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             {/* Left column - Content */}
             <div className="space-y-8">
-              <h2 className="text-4xl md:text-5xl font-heading font-bold">
-                {t.about.title}
-              </h2>
-
               {/* Intro paragraph */}
               <div className="text-lg text-muted-foreground space-y-4 text-left">
                 <p>
@@ -236,10 +246,10 @@ export default function About() {
               </div>
             </div>
 
-            {/* Right column - SOON Placeholder (centered) */}
-            <div className="flex items-center justify-center">
-              <div className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full border-2 border-dashed border-muted-foreground/30 flex items-center justify-center bg-muted/20 relative overflow-hidden group">
-                <span className="text-sm md:text-base font-bold text-muted-foreground group-hover:scale-110 transition-transform">
+            {/* Right column - SOON Placeholder (desktop only, sticky) */}
+            <div className="hidden md:flex items-center justify-center md:sticky md:top-24">
+              <div className="w-40 h-40 lg:w-48 lg:h-48 rounded-full border-2 border-dashed border-muted-foreground/30 flex items-center justify-center bg-muted/20 relative overflow-hidden group">
+                <span className="text-base font-bold text-muted-foreground group-hover:scale-110 transition-transform">
                   {t.about.soon}
                 </span>
               </div>

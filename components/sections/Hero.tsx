@@ -82,9 +82,9 @@ export default function Hero() {
   return (
     <div
       ref={sectionRef}
-      className="min-h-screen flex flex-col items-center justify-center relative px-6 md:px-12 lg:px-24 max-w-7xl mx-auto py-20 lg:py-0"
+      className="min-h-screen flex flex-col items-center justify-center relative px-6 md:px-10 lg:px-16 max-w-[1400px] mx-auto py-20 lg:py-0"
     >
-      <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
+      <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
         {/* Left side - Text content */}
         <div className="w-full lg:flex-1 lg:min-w-0 order-2 lg:order-1">
           {/* Small intro text */}
@@ -98,7 +98,7 @@ export default function Hero() {
           {/* Huge name */}
           <h1
             ref={nameRef}
-            className="font-heading text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-3 tracking-tight opacity-0 text-foreground leading-none"
+            className="font-heading text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-3 tracking-tight opacity-0 text-foreground leading-none whitespace-nowrap"
           >
             Camilo Sánchez
           </h1>
@@ -156,7 +156,7 @@ export default function Hero() {
 
         {/* Right side - Floating MacBook */}
         <div
-          className="order-1 lg:order-2 flex-shrink-0"
+          className="order-1 lg:order-2 flex-shrink-0 lg:mr-[-2rem] xl:mr-[-4rem]"
           style={{
             width: 'min(85vw, 500px)',
           }}

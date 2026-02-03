@@ -98,7 +98,7 @@ export default function Hero() {
           {/* Huge name */}
           <h1
             ref={nameRef}
-            className="font-heading text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-3 tracking-tight opacity-0 text-foreground leading-none whitespace-nowrap"
+            className="font-heading text-[2.75rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-3 tracking-tight opacity-0 text-foreground leading-none lg:whitespace-nowrap"
           >
             Camilo Sánchez
           </h1>

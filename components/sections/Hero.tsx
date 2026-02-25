@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { Mail, ArrowDown } from "lucide-react";
+import { Mail, ArrowDown, Download } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import FloatingMacBook from "@/components/FloatingMacBook";
 import { useLanguage } from "@/context/LanguageContext";
@@ -121,13 +121,21 @@ export default function Hero() {
 
           {/* CTA and Social */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            <div ref={ctaRef} className="opacity-0">
+            <div ref={ctaRef} className="flex flex-wrap gap-4 opacity-0">
               <a
                 href="mailto:camilosanchezs288@gmail.com?subject=Contacto desde portafolio"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border-2 border-primary text-primary hover:bg-primary/10 rounded-md font-medium transition-all duration-200 glow-on-hover"
               >
                 <Mail className="w-5 h-5" />
                 {t.hero.cta}
+              </a>
+              <a
+                href="/Camilo_Sanchez_CV_EN.pdf"
+                download
+                className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border-2 border-accent text-accent hover:bg-accent/10 rounded-md font-medium transition-all duration-200 glow-on-hover"
+              >
+                <Download className="w-5 h-5" />
+                {t.hero.downloadCv}
               </a>
             </div>
 

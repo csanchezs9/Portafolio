@@ -15,6 +15,7 @@ interface Translations {
         role: string;
         description: ReactNode;
         cta: string;
+        downloadCv: string;
         scroll: string;
     };
     about: {
@@ -81,6 +82,7 @@ const translations: Record<Language, Translations> = {
                 </>
             ),
             cta: "Let's talk!",
+            downloadCv: "Download CV",
             scroll: "Scroll",
         },
         about: {
@@ -167,6 +169,7 @@ const translations: Record<Language, Translations> = {
                 </>
             ),
             cta: "¡Hablemos!",
+            downloadCv: "Descargar CV",
             scroll: "Scroll",
         },
         about: {

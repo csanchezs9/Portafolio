@@ -104,7 +104,7 @@ export default function Projects() {
   const direction = active === "prod" ? -1 : 1;
 
   return (
-    <div className="flex items-center justify-center px-4 py-16">
+    <div className="flex items-center justify-center px-6 md:px-10 lg:px-16 py-16">
       <div className="max-w-6xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -190,32 +190,22 @@ export default function Projects() {
               }}
               className="grid grid-cols-1 md:grid-cols-2 gap-6"
             >
-              {activeTab.list.map((project, idx) => {
+              {activeTab.list.map((project) => {
                 // @ts-ignore
                 const item = t.projects.items[project.key];
                 return (
-                  <motion.div
+                  <ProjectCard
                     key={project.key}
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.4,
-                      delay: 0.15 + idx * 0.08,
-                      ease: "easeOut",
-                    }}
-                  >
-                    <ProjectCard
-                      title={item.title}
-                      description={item.desc}
-                      tags={project.tags}
-                      github={project.github}
-                      demo={project.demo}
-                      pdf={project.pdf}
-                      preview={project.preview}
-                      forFun={project.forFun}
-                      privateRepo={project.privateRepo}
-                    />
-                  </motion.div>
+                    title={item.title}
+                    description={item.desc}
+                    tags={project.tags}
+                    github={project.github}
+                    demo={project.demo}
+                    pdf={project.pdf}
+                    preview={project.preview}
+                    forFun={project.forFun}
+                    privateRepo={project.privateRepo}
+                  />
                 );
               })}
             </motion.div>

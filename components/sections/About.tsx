@@ -174,7 +174,7 @@ export default function About() {
   };
 
   return (
-    <div className="flex items-center justify-center px-4 py-16">
+    <div className="flex items-center justify-center px-6 md:px-10 lg:px-16 py-16">
       <div className="max-w-7xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

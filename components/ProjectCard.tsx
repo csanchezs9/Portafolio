@@ -1,7 +1,6 @@
 "use client";
 
 import { ExternalLink, Github, FileText, Lock } from "lucide-react";
-import { motion } from "framer-motion";
 
 interface ProjectCardProps {
     title: string;
@@ -27,11 +26,7 @@ export default function ProjectCard({
     privateRepo = false,
 }: ProjectCardProps) {
     return (
-        <motion.article
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
+        <article
             className={`group relative rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.02] ${forFun
                     ? "border-2 border-dashed border-primary/40 hover:border-primary bg-gradient-to-br from-primary/5 to-accent/10"
                     : "border border-border/10 hover:border-border/30 bg-card/30 backdrop-blur-sm"
@@ -141,6 +136,6 @@ export default function ProjectCard({
                     )}
                 </div>
             </div>
-        </motion.article>
+        </article>
     );
 }

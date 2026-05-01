@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLink, Github, FileText } from "lucide-react";
+import { ExternalLink, Github, FileText, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface ProjectCardProps {
@@ -12,6 +12,7 @@ interface ProjectCardProps {
     pdf?: string;
     preview?: string;
     forFun?: boolean;
+    privateRepo?: boolean;
 }
 
 export default function ProjectCard({
@@ -23,6 +24,7 @@ export default function ProjectCard({
     pdf,
     preview,
     forFun = false,
+    privateRepo = false,
 }: ProjectCardProps) {
     return (
         <motion.article
@@ -89,16 +91,31 @@ export default function ProjectCard({
 
                 {/* Action Buttons */}
                 <div className="flex gap-3 pt-2">
-                    {github && (
+                    {github && !privateRepo && (
                         <a
                             href={github}
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label="View code"
                             className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-foreground border border-border/50 hover:border-primary/50 hover:bg-primary/5 rounded-lg transition-all duration-200 hover:scale-105"
                         >
                             <Github className="w-4 h-4" />
                             Code
                         </a>
+                    )}
+                    {privateRepo && (
+                        <span
+                            aria-label="Private repository"
+                            tabIndex={0}
+                            className="group/code inline-flex items-center gap-2 px-4 py-2 text-sm font-medium border rounded-lg cursor-not-allowed select-none transition-all duration-200 text-foreground border-border/50 hover:border-red-500/70 hover:bg-red-500/10 hover:text-red-500"
+                        >
+                            <Github className="w-4 h-4 group-hover/code:hidden" />
+                            <Lock className="w-4 h-4 hidden group-hover/code:inline" />
+                            <span className="group-hover/code:hidden">Code</span>
+                            <span className="hidden group-hover/code:inline font-semibold uppercase tracking-wider text-xs">
+                                Private
+                            </span>
+                        </span>
                     )}
                     {demo && (
                         <a

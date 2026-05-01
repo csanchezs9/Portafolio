@@ -42,6 +42,12 @@ interface Translations {
         viewCode: string;
         viewDemo: string;
         viewPdf: string;
+        prodTitle: string;
+        prodSubtitle: string;
+        prodBadge: string;
+        personalTitle: string;
+        personalSubtitle: string;
+        personalBadge: string;
         items: {
             diamante: { title: string; desc: string };
             polles: { title: string; desc: string };
@@ -49,6 +55,8 @@ interface Translations {
             dap: { title: string; desc: string };
             infinito: { title: string; desc: string };
             snake3d: { title: string; desc: string };
+            diamantePreprensa: { title: string; desc: string };
+            diamanteApp: { title: string; desc: string };
         };
     };
     contact: {
@@ -113,6 +121,12 @@ const translations: Record<Language, Translations> = {
             viewCode: "Code",
             viewDemo: "Demo",
             viewPdf: "View",
+            prodTitle: "In Prod ♞",
+            prodSubtitle: "Live systems handling real users, real data, real traffic.",
+            prodBadge: "LIVE",
+            personalTitle: "Personal Projects ♟",
+            personalSubtitle: "Where I experiment, break things on purpose, and learn out loud.",
+            personalBadge: "EXPERIMENTAL",
             items: {
                 diamante: {
                     title: "Gráficas Diamante",
@@ -131,12 +145,20 @@ const translations: Record<Language, Translations> = {
                     desc: "Order management system for DAP AutoPart's with Flutter mobile app for tablets and Node.js backend. Allows client search, product query from CSV, order creation with automatic price calculation, PDF generation, and email sending. Includes admin web panel.",
                 },
                 infinito: {
-                    title: "Infinito Piercing - PDF Generator",
-                    desc: "Automated system generating professional PDF catalogs with real-time products from Shopify API. Allows selecting collections (Ear, Nose, Body, etc.) and downloading ready-to-print A4 catalogs with minimalist black and white design.",
+                    title: "Infinito Piercing — PDF Catalog Generator",
+                    desc: "Monorepo with Next.js 14 (App Router) frontend and Express + TypeScript backend. Pulls live products from Shopify Admin API, renders a Tailwind-styled HTML template, and pipes it through Puppeteer to deliver a print-ready A4 catalog as direct download. Deployed on a DigitalOcean droplet.",
                 },
                 snake3d: {
                     title: "🎮 Snake 3D Game",
                     desc: "Classic Snake game reimagined in 3D! Built with Three.js for smooth 3D graphics and gameplay.",
+                },
+                diamantePreprensa: {
+                    title: "Gráficas Diamante — Prepress",
+                    desc: "Internal prepress management system for Gráficas Diamante. Next.js + PostgreSQL (Prisma) deployed on-prem on Windows Server via NSSM service, encrypted SMTP module, PIN-protected configuration, and assisted backup/restore tooling. Runs over the company LAN.",
+                },
+                diamanteApp: {
+                    title: "Gráficas Diamante — Maintenance App",
+                    desc: "Cross-platform mobile app (Expo + NativeWind) with dockerized Express backend for machinery, maintenance jobs, and spare parts tracking. Supabase as PostgreSQL backend, SSH deploy to client cloud server, integrated keep-alive, and custom minimalist UI inspired by Linear/Notion.",
                 },
             },
         },
@@ -200,6 +222,12 @@ const translations: Record<Language, Translations> = {
             viewCode: "Código",
             viewDemo: "Demo",
             viewPdf: "Ver",
+            prodTitle: "In Prod ♞",
+            prodSubtitle: "Sistemas vivos manejando usuarios, datos y tráfico real.",
+            prodBadge: "EN VIVO",
+            personalTitle: "Personal Projects ♟",
+            personalSubtitle: "Donde experimento, rompo cosas a propósito y aprendo en voz alta.",
+            personalBadge: "EXPERIMENTAL",
             items: {
                 diamante: {
                     title: "Gráficas Diamante",
@@ -218,12 +246,20 @@ const translations: Record<Language, Translations> = {
                     desc: "Sistema de gestión de órdenes para DAP AutoPart's con app móvil Flutter para tablets y backend Node.js. Permite búsqueda de clientes, consulta de productos desde CSV, creación de órdenes con cálculo automático de precios, generación de PDFs y envío por correo. Incluye panel web de administración.",
                 },
                 infinito: {
-                    title: "Infinito Piercing - Generador de Catálogos PDF",
-                    desc: "Sistema automatizado que genera catálogos PDF profesionales con productos en tiempo real desde la API de Shopify. Permite seleccionar diferentes colecciones (Oreja, Nariz, Corporal, etc.) y descargar catálogos listos para imprimir en formato A4 con diseño minimalista blanco y negro.",
+                    title: "Infinito Piercing — Generador de Catálogos PDF",
+                    desc: "Monorepo con frontend Next.js 14 (App Router) y backend Express + TypeScript. Consume productos en tiempo real desde la Shopify Admin API, renderiza un template HTML estilizado con Tailwind y lo pasa por Puppeteer para entregar un catálogo A4 listo para imprimir como descarga directa. Desplegado en un droplet de DigitalOcean.",
                 },
                 snake3d: {
                     title: "🎮 Juego Snake 3D",
                     desc: "¡El clásico juego Snake reimaginado en 3D! Construido con Three.js para gráficos y jugabilidad 3D fluida.",
+                },
+                diamantePreprensa: {
+                    title: "Gráficas Diamante — Preprensa",
+                    desc: "Sistema interno de gestión de preprensa para Gráficas Diamante. Next.js + PostgreSQL (Prisma) desplegado on-premise en servidor Windows vía servicio NSSM, módulo SMTP cifrado, configuración protegida por PIN y herramientas de backup/restore asistido. Funciona sobre la LAN de la empresa.",
+                },
+                diamanteApp: {
+                    title: "Gráficas Diamante — App de Mantenimiento",
+                    desc: "App móvil cross-platform (Expo + NativeWind) con backend Express dockerizado para gestión de máquinas, mantenimientos y repuestos. Supabase como base PostgreSQL, deploy SSH al servidor cloud del cliente, keep-alive integrado y UI minimalista custom inspirada en Linear/Notion.",
                 },
             },
         },

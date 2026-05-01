@@ -184,7 +184,7 @@ export default function About() {
           className="mb-16"
         >
           {/* Title */}
-          <h2 className="text-4xl md:text-5xl font-heading font-bold mb-8">
+          <h2 className="text-[clamp(2rem,3.5vw,3rem)] font-heading font-bold mb-8">
             {t.about.title}
           </h2>
 

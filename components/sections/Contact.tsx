@@ -92,7 +92,7 @@ export default function Contact() {
             className="lg:col-span-3"
           >
             {/* Huge Heading */}
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-12 leading-tight">
+            <h2 className="text-[clamp(2rem,4vw,3.75rem)] font-heading font-bold mb-12 leading-tight">
               {t.contact.title === "Contacto"
                 ? "Hablemos de tu próximo proyecto"
                 : "Let's build something great together"}

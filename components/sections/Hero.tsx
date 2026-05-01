@@ -98,7 +98,7 @@ export default function Hero() {
           {/* Huge name */}
           <h1
             ref={nameRef}
-            className="font-heading text-[2.75rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-3 tracking-tight opacity-0 text-foreground leading-none lg:whitespace-nowrap"
+            className="font-heading text-[clamp(2.5rem,5.2vw,6rem)] font-bold mb-3 tracking-tight opacity-0 text-foreground leading-none lg:whitespace-nowrap"
           >
             Camilo Sánchez
           </h1>
@@ -106,7 +106,7 @@ export default function Hero() {
           {/* Large role with accent color */}
           <h2
             ref={roleRef}
-            className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 tracking-tight opacity-0 text-accent leading-none"
+            className="font-heading text-[clamp(1.75rem,3.8vw,4.5rem)] font-bold mb-6 tracking-tight opacity-0 text-accent leading-none"
           >
             {t.hero.role}
           </h2>
@@ -114,7 +114,7 @@ export default function Hero() {
           {/* Smaller description */}
           <p
             ref={descriptionRef}
-            className="text-base md:text-lg text-muted-foreground mb-8 max-w-2xl leading-relaxed opacity-0"
+            className="text-[clamp(0.95rem,1.05vw,1.125rem)] text-muted-foreground mb-8 max-w-2xl leading-relaxed opacity-0"
           >
             {t.hero.description}
           </p>
@@ -166,7 +166,7 @@ export default function Hero() {
         <div
           className="order-1 lg:order-2 flex-shrink-0 lg:mr-[-2rem] xl:mr-[-4rem]"
           style={{
-            width: 'min(85vw, 500px)',
+            width: 'min(85vw, clamp(320px, 36vw, 500px))',
           }}
         >
           <FloatingMacBook />

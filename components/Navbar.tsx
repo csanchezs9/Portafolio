@@ -18,6 +18,7 @@ export default function Navbar() {
   const linksRef = useRef<HTMLDivElement>(null);
   const langRef = useRef<HTMLButtonElement>(null);
   const collapsedRef = useRef(false);
+  const tlRef = useRef<gsap.core.Timeline | null>(null);
   const { t, language, setLanguage } = useLanguage();
 
   const navItems = [
@@ -80,47 +81,54 @@ export default function Navbar() {
         return navPad - (window.innerWidth - finalBarW) / 2;
       };
 
-      // Collapse to logo-only / expand to full pill (elastic, rubber-band)
+      // Collapse to logo-only / expand to full pill — stepped + soft spring
       const setCollapsed = (c: boolean) => {
         if (collapsedRef.current === c) return;
         collapsedRef.current = c;
         const isDesktop = window.matchMedia("(min-width: 768px)").matches;
-        gsap.killTweensOf(group);
-        gsap.killTweensOf(bar);
+        tlRef.current?.kill();
+        const tl = gsap.timeline();
+        tlRef.current = tl;
 
         if (c) {
-          gsap.to(group, {
+          // Step 1: shrink into a pill (centered)
+          tl.to(group, {
             width: 0,
             opacity: 0,
             marginLeft: 0,
-            duration: 0.45,
+            duration: 0.6,
             ease: "power3.inOut",
           });
-          gsap.to(bar, {
-            x: isDesktop ? computeLeftX() : 0,
-            duration: 1,
-            ease: "elastic.out(1, 0.6)",
-          });
+          // Step 2: glide the pill to the top-left (desktop only)
+          if (isDesktop) {
+            tl.to(
+              bar,
+              { x: computeLeftX(), duration: 0.8, ease: "back.out(1.2)" },
+              "+=0.1"
+            );
+          }
         } else {
-          gsap.to(bar, {
-            x: 0,
-            duration: 1,
-            ease: "elastic.out(1, 0.6)",
-          });
+          // measure full width, then start collapsed
           gsap.set(group, { width: "auto", marginLeft: "" });
           const w = group.scrollWidth;
-          gsap.fromTo(
+          gsap.set(group, { width: 0, opacity: 0 });
+          // Step 1: glide back to center (desktop only)
+          if (isDesktop) {
+            tl.to(bar, { x: 0, duration: 0.8, ease: "back.out(1.2)" });
+          }
+          // Step 2: unfold the pill
+          tl.to(
             group,
-            { width: 0, opacity: 0 },
             {
               width: w,
               opacity: 1,
-              duration: 0.9,
-              ease: "elastic.out(1, 0.5)",
+              duration: 0.65,
+              ease: "back.out(1.3)",
               onComplete: () => {
                 gsap.set(group, { width: "auto" });
               },
-            }
+            },
+            isDesktop ? "+=0.1" : 0
           );
         }
       };

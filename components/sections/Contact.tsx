@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { toast } from "sonner";
 import { useLanguage } from "@/context/LanguageContext";
+import RevealText from "@/components/anim/RevealText";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -92,11 +93,15 @@ export default function Contact() {
             className="lg:col-span-3"
           >
             {/* Huge Heading */}
-            <h2 className="text-[clamp(2rem,4vw,3.75rem)] font-heading font-bold mb-12 leading-tight">
-              {t.contact.title === "Contacto"
-                ? "Hablemos de tu próximo proyecto"
-                : "Let's build something great together"}
-            </h2>
+            <RevealText
+              as="h2"
+              text={
+                t.contact.title === "Contacto"
+                  ? "Hablemos de tu próximo proyecto"
+                  : "Let's build something great together"
+              }
+              className="text-[clamp(2rem,4vw,3.75rem)] font-heading font-bold mb-12 leading-tight"
+            />
 
             {/* Minimal Form */}
             <form onSubmit={handleSubmit} className="space-y-8">

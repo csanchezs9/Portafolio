@@ -2,10 +2,15 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Mail, ArrowDown, Download } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import FloatingMacBook from "@/components/FloatingMacBook";
 import { useLanguage } from "@/context/LanguageContext";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function Hero() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -16,6 +21,7 @@ export default function Hero() {
   const ctaRef = useRef<HTMLDivElement>(null);
   const socialsRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const macbookRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -73,6 +79,18 @@ export default function Hero() {
         yoyo: true,
         ease: "power1.inOut",
         delay: 4,
+      });
+
+      // Parallax: MacBook drifts up as you scroll out of the hero
+      gsap.to(macbookRef.current, {
+        yPercent: -22,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
       });
     }, sectionRef);
 
@@ -164,6 +182,7 @@ export default function Hero() {
 
         {/* Right side - Floating MacBook */}
         <div
+          ref={macbookRef}
           className="order-1 lg:order-2 flex-shrink-0 lg:mr-[-2rem] xl:mr-[-4rem]"
           style={{
             width: 'min(85vw, clamp(320px, 36vw, 500px))',

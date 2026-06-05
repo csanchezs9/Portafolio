@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ProjectCard from "@/components/ProjectCard";
+import RevealText from "@/components/anim/RevealText";
 import { useLanguage } from "@/context/LanguageContext";
 
 type ProjectItem = {
@@ -113,9 +114,11 @@ export default function Projects() {
           viewport={{ once: true }}
           className="text-center mb-10"
         >
-          <h2 className="text-[clamp(2rem,3.5vw,3rem)] font-heading font-bold mb-4">
-            {t.projects.title}
-          </h2>
+          <RevealText
+            as="h2"
+            text={t.projects.title}
+            className="text-[clamp(2rem,3.5vw,3rem)] font-heading font-bold mb-4"
+          />
           <p className="text-[clamp(0.95rem,1.1vw,1.125rem)] text-muted-foreground max-w-2xl mx-auto">
             {t.projects.subtitle}
           </p>

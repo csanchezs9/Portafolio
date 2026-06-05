@@ -21,6 +21,7 @@ import {
 import { FaJava } from "react-icons/fa";
 
 import { useLanguage } from "@/context/LanguageContext";
+import RevealText from "@/components/anim/RevealText";
 
 function DeviceCard({ device, data, index }: any) {
   const [isHovered, setIsHovered] = useState(false);
@@ -68,9 +69,9 @@ function DeviceCard({ device, data, index }: any) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.2 }}
+      transition={{ duration: 0.7, delay: index * 0.12, ease: [0.34, 1.56, 0.64, 1] }}
       viewport={{ once: true }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -184,9 +185,11 @@ export default function About() {
           className="mb-16"
         >
           {/* Title */}
-          <h2 className="text-[clamp(2rem,3.5vw,3rem)] font-heading font-bold mb-8">
-            {t.about.title}
-          </h2>
+          <RevealText
+            as="h2"
+            text={t.about.title}
+            className="text-[clamp(2rem,3.5vw,3rem)] font-heading font-bold mb-8"
+          />
 
           {/* SOON Placeholder - Shows on mobile only, right after title */}
           <div className="flex items-center justify-center mb-8 md:hidden">

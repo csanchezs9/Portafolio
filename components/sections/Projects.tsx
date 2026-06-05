@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ProjectCard from "@/components/ProjectCard";
 import RevealText from "@/components/anim/RevealText";
+import BrowserShowcase from "@/components/BrowserShowcase";
 import { useLanguage } from "@/context/LanguageContext";
 
 type ProjectItem = {
@@ -63,12 +64,16 @@ const personalProjects: ProjectItem[] = [
     pdf: "/catalogo-piercing-corporal.pdf",
   },
   {
-    key: "snake3d",
-    tags: ["Three.js", "JavaScript", "HTML5", "CSS3", "3D Graphics"],
-    github: "https://github.com/csanchezs9/snake3d",
-    demo: "https://snake3d-blond.vercel.app/",
-    preview: "/snake3d-preview.png",
-    forFun: true,
+    key: "macrosearch",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Radix UI", "Zod", "Resend", "Lenis", "PWA"],
+    github: "https://github.com/csanchezs9/macro-search",
+    demo: "https://macrosearch.vercel.app/",
+  },
+  {
+    key: "santichill",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "GSAP", "Three.js", "Lenis"],
+    github: "https://github.com/csanchezs9/Prospect_web",
+    demo: "https://santi-chill.vercel.app/",
   },
 ];
 
@@ -211,6 +216,8 @@ export default function Projects() {
                   />
                 );
               })}
+
+              {active === "personal" && <BrowserShowcase />}
             </motion.div>
           </AnimatePresence>
         </div>

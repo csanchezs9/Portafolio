@@ -57,7 +57,8 @@ interface Translations {
             whatsapp: { title: string; desc: string };
             dap: { title: string; desc: string };
             infinito: { title: string; desc: string };
-            snake3d: { title: string; desc: string };
+            macrosearch: { title: string; desc: string };
+            santichill: { title: string; desc: string };
             diamantePreprensa: { title: string; desc: string };
             diamanteApp: { title: string; desc: string };
         };
@@ -154,9 +155,13 @@ const translations: Record<Language, Translations> = {
                     title: "Infinito Piercing — PDF Catalog Generator",
                     desc: "Monorepo with Next.js 14 (App Router) frontend and Express + TypeScript backend. Pulls live products from Shopify Admin API, renders a Tailwind-styled HTML template, and pipes it through Puppeteer to deliver a print-ready A4 catalog as direct download. Deployed on a DigitalOcean droplet.",
                 },
-                snake3d: {
-                    title: "🎮 Snake 3D Game",
-                    desc: "Classic Snake game reimagined in 3D! Built with Three.js for smooth 3D graphics and gameplay.",
+                macrosearch: {
+                    title: "Macro Search",
+                    desc: "Fast, installable PWA to search foods and track nutrition macros. Built with Next.js and a clean Radix UI, Zod-validated forms, Resend email and buttery Lenis scrolling. Tuned for performance (Lighthouse CI).",
+                },
+                santichill: {
+                    title: "Santi Chill",
+                    desc: "Experimental animated landing with Three.js shader effects, GSAP-driven motion and Lenis smooth scrolling.",
                 },
                 diamantePreprensa: {
                     title: "Gráficas Diamante — Prepress",
@@ -258,9 +263,13 @@ const translations: Record<Language, Translations> = {
                     title: "Infinito Piercing — Generador de Catálogos PDF",
                     desc: "Monorepo con frontend Next.js 14 (App Router) y backend Express + TypeScript. Consume productos en tiempo real desde la Shopify Admin API, renderiza un template HTML estilizado con Tailwind y lo pasa por Puppeteer para entregar un catálogo A4 listo para imprimir como descarga directa. Desplegado en un droplet de DigitalOcean.",
                 },
-                snake3d: {
-                    title: "🎮 Juego Snake 3D",
-                    desc: "¡El clásico juego Snake reimaginado en 3D! Construido con Three.js para gráficos y jugabilidad 3D fluida.",
+                macrosearch: {
+                    title: "Macro Search",
+                    desc: "PWA rápida e instalable para buscar alimentos y rastrear macros nutricionales. Hecha con Next.js y UI limpia con Radix, formularios validados con Zod, emails con Resend y scroll suave con Lenis. Optimizada para rendimiento (Lighthouse CI).",
+                },
+                santichill: {
+                    title: "Santi Chill",
+                    desc: "Landing animada experimental con efectos shader en Three.js, movimiento con GSAP y scroll suave con Lenis.",
                 },
                 diamantePreprensa: {
                     title: "Gráficas Diamante — Preprensa",

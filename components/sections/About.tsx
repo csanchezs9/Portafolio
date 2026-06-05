@@ -115,7 +115,7 @@ function DeviceCard({ device, data, index }: any) {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: isHovered ? 1 : 0, height: isHovered ? "auto" : 0 }}
           transition={{ duration: 0.35, ease: "easeInOut" }}
-          className="grid grid-cols-4 gap-3 overflow-hidden"
+          className="grid grid-cols-3 gap-3 overflow-hidden"
         >
           {data.techs.map((tech: any, idx: number) => (
             <motion.div
@@ -134,8 +134,8 @@ function DeviceCard({ device, data, index }: any) {
               whileHover={{ scale: 1.12, y: -4 }}
               className="flex flex-col items-center gap-1.5 p-2 rounded-lg bg-background/50 hover:bg-background transition-colors"
             >
-              <tech.icon className="w-7 h-7" style={{ color: tech.color }} />
-              <span className="text-[10px] font-medium text-center leading-tight text-muted-foreground">
+              <tech.icon className="w-7 h-7 shrink-0" style={{ color: tech.color }} />
+              <span className="w-full text-[11px] font-medium text-center leading-tight text-muted-foreground break-words">
                 {tech.name}
               </span>
             </motion.div>

@@ -29,13 +29,13 @@ export default function ProjectCard({
     return (
         <article className="group relative rounded-2xl overflow-hidden">
             {/* ShapeBlur is the card frame — revealed by the cursor */}
-            <div className="pointer-events-none absolute inset-0 z-0">
+            <div className="pointer-events-none absolute inset-0 z-0 opacity-60">
                 <ShapeBlur
                     shapeSize={0.92}
                     roundness={0.12}
                     borderSize={0.012}
-                    circleSize={0.5}
-                    circleEdge={0.9}
+                    circleSize={0.42}
+                    circleEdge={0.5}
                 />
             </div>
 

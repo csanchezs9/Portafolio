@@ -60,7 +60,7 @@ void main() {
     float circle = fillC(sdCircle(p, pm), u_circleSize, u_circleEdge);
     float line = strokeAA(d, 0.0, u_borderSize, circle);
 
-    gl_FragColor = vec4(vec3(1.0), line);
+    gl_FragColor = vec4(vec3(0.8), line);
 }
 `;
 

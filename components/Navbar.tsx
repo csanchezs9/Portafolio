@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { Menu, X, Languages } from "lucide-react";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function Navbar() {
@@ -81,7 +80,7 @@ export default function Navbar() {
           <div ref={linksRef} className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
               <a
-                key={item.name}
+                key={item.href}
                 href={item.href}
                 className="relative px-4 py-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors opacity-0 group"
               >
@@ -97,7 +96,6 @@ export default function Navbar() {
               >
                 <Languages size={20} />
               </button>
-              <ThemeToggle />
             </div>
           </div>
 
@@ -110,7 +108,6 @@ export default function Navbar() {
             >
               <Languages size={20} />
             </button>
-            <ThemeToggle />
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 text-muted-foreground hover:text-foreground transition-colors"
@@ -125,7 +122,7 @@ export default function Navbar() {
           <div className="md:hidden mt-4 pb-4 border-t border-border/50 pt-4 space-y-2">
             {navItems.map((item) => (
               <a
-                key={item.name}
+                key={item.href}
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block w-full text-left py-3 px-4 text-sm font-semibold text-muted-foreground hover:text-foreground rounded-lg transition-colors"

@@ -110,54 +110,49 @@ function DeviceCard({ device, data, index }: any) {
           {data.title}
         </h3>
 
-        {/* Tech icons - appear on hover */}
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{
-            opacity: isHovered ? 1 : 0,
-            height: isHovered ? "auto" : 0
-          }}
-          transition={{ duration: 0.3 }}
-          className="grid grid-cols-4 gap-4 overflow-hidden"
-        >
-          {data.techs.map((tech: any, idx: number) => (
-            <motion.div
-              key={tech.name}
-              initial={{ scale: 0.4, opacity: 0, y: 12 }}
-              animate={{
-                scale: isHovered ? 1 : 0.4,
-                opacity: isHovered ? 1 : 0,
-                y: isHovered ? 0 : 12,
-              }}
-              transition={{
-                duration: 0.4,
-                delay: isHovered ? idx * 0.06 : 0,
-                ease: [0.34, 1.56, 0.64, 1],
-              }}
-              whileHover={{ scale: 1.12, y: -4 }}
-              className="flex flex-col items-center gap-2 p-3 rounded-lg bg-background/50 hover:bg-background transition-colors"
-            >
-              <tech.icon
-                className="w-8 h-8"
-                style={{ color: tech.color }}
-              />
-              <span className="text-xs font-medium text-center text-muted-foreground">
-                {tech.name}
-              </span>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Hover hint */}
-        {!isHovered && (
+        {/* Reserved area: hint (idle) and icons (hover) overlaid so the
+            card height never changes on hover (otherwise the stretched row
+            would resize every sibling). */}
+        <div className="relative flex-1 min-h-[14rem]">
+          {/* Hover hint */}
           <motion.p
-            initial={{ opacity: 1 }}
             animate={{ opacity: isHovered ? 0 : 1 }}
-            className="text-sm text-muted-foreground text-center mt-auto pt-4"
+            transition={{ duration: 0.25 }}
+            className="absolute inset-0 flex items-center justify-center text-sm text-muted-foreground"
           >
             {t.about.viewTech}
           </motion.p>
-        )}
+
+          {/* Tech icons */}
+          <div
+            className="absolute inset-0 grid grid-cols-4 gap-3 content-start"
+            style={{ pointerEvents: isHovered ? "auto" : "none" }}
+          >
+            {data.techs.map((tech: any, idx: number) => (
+              <motion.div
+                key={tech.name}
+                initial={{ scale: 0.4, opacity: 0, y: 12 }}
+                animate={{
+                  scale: isHovered ? 1 : 0.4,
+                  opacity: isHovered ? 1 : 0,
+                  y: isHovered ? 0 : 12,
+                }}
+                transition={{
+                  duration: 0.4,
+                  delay: isHovered ? idx * 0.06 : 0,
+                  ease: [0.34, 1.56, 0.64, 1],
+                }}
+                whileHover={{ scale: 1.12, y: -4 }}
+                className="flex h-fit flex-col items-center gap-1.5 p-2 rounded-lg bg-background/50 hover:bg-background transition-colors"
+              >
+                <tech.icon className="w-7 h-7" style={{ color: tech.color }} />
+                <span className="text-[10px] font-medium text-center leading-tight text-muted-foreground">
+                  {tech.name}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
       </div>
     </motion.div>
   );

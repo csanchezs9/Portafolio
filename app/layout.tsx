@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/components/Footer";
 import IntroWrapper from "@/components/IntroWrapper";
+import SmoothScroll from "@/components/SmoothScroll";
 import { LanguageProvider } from "@/context/LanguageContext";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -39,7 +40,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="es" suppressHydrationWarning>
       <body className={`${inter.variable} ${sora.variable} font-sans`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
@@ -49,12 +50,14 @@ export default function RootLayout({
           disableTransitionOnChange={false}
         >
           <LanguageProvider>
-            <IntroWrapper>
-              <Navbar />
-              {children}
-              <Footer />
-              <Toaster />
-            </IntroWrapper>
+            <SmoothScroll>
+              <IntroWrapper>
+                <Navbar />
+                {children}
+                <Footer />
+                <Toaster />
+              </IntroWrapper>
+            </SmoothScroll>
           </LanguageProvider>
         </ThemeProvider>
       </body>

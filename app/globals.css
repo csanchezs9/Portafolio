@@ -94,7 +94,24 @@
   /* Smooth theme transitions */
   html {
     transition: background-color 0.3s ease, color 0.3s ease;
-    scroll-behavior: smooth;
+  }
+
+  /* Lenis smooth scroll */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
   }
 
   /* Better text selection with primary color */

@@ -138,8 +138,8 @@ export default function Navbar() {
         end: "max",
         onUpdate: (self) => {
           const sc = self.scroll();
-          applyMorph(sc / 160);
-          if (sc < 100) setCollapsed(false); // near top: always full
+          applyMorph(sc / 120);
+          if (sc < 30) setCollapsed(false); // at the very top: full
           else setCollapsed(self.direction === 1); // down -> collapse, up -> expand
         },
       });

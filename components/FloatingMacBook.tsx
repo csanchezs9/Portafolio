@@ -3,7 +3,11 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-export default function FloatingMacBook() {
+export default function FloatingMacBook({
+    onClick,
+}: {
+    onClick?: () => void;
+}) {
     const macbookRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -31,7 +35,17 @@ export default function FloatingMacBook() {
     return (
         <div
             ref={macbookRef}
-            className="w-full opacity-90"
+            onClick={onClick}
+            role={onClick ? "button" : undefined}
+            tabIndex={onClick ? 0 : undefined}
+            onKeyDown={(e) => {
+                if (onClick && (e.key === "Enter" || e.key === " ")) {
+                    e.preventDefault();
+                    onClick();
+                }
+            }}
+            aria-label={onClick ? "Abrir terminal" : undefined}
+            className={`w-full opacity-90 ${onClick ? "cursor-pointer transition-transform hover:scale-[1.03]" : ""}`}
         >
             <svg
                 viewBox="0 0 500 350"

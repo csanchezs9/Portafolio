@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Mail, ArrowDown, Download } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import FloatingMacBook from "@/components/FloatingMacBook";
 import HoverBubble from "@/components/HoverBubble";
+import TerminalOverlay from "@/components/TerminalOverlay";
 import { useLanguage } from "@/context/LanguageContext";
 
 if (typeof window !== "undefined") {
@@ -23,6 +24,7 @@ export default function Hero() {
   const socialsRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const macbookRef = useRef<HTMLDivElement>(null);
+  const [termOpen, setTermOpen] = useState(false);
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -201,7 +203,7 @@ export default function Hero() {
             width: 'min(85vw, clamp(320px, 36vw, 500px))',
           }}
         >
-          <FloatingMacBook />
+          <FloatingMacBook onClick={() => setTermOpen(true)} />
         </div>
       </div>
 
@@ -218,6 +220,8 @@ export default function Hero() {
           <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
         </a>
       </div>
+
+      <TerminalOverlay open={termOpen} onClose={() => setTermOpen(false)} />
     </div>
   );
 }

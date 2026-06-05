@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { ExternalLink, Github, FileText, Lock } from "lucide-react";
 import ShapeBlur from "@/components/ShapeBlur";
 
@@ -27,30 +26,17 @@ export default function ProjectCard({
     forFun = false,
     privateRepo = false,
 }: ProjectCardProps) {
-    const [hovered, setHovered] = useState(false);
-
     return (
-        <article
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-            className={`group relative rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.02] ${forFun
-                    ? "border-2 border-dashed border-primary/40 hover:border-primary bg-gradient-to-br from-primary/5 to-accent/10"
-                    : "border border-border/10 hover:border-border/30 bg-card/30 backdrop-blur-sm"
-                } hover:shadow-2xl hover:shadow-primary/10`}
-        >
-            {/* ShapeBlur — soft outline tracing the card edges, on hover */}
-            <div
-                className={`pointer-events-none absolute inset-0 z-[2] transition-opacity duration-300 ${hovered ? "opacity-70" : "opacity-0"}`}
-            >
-                {hovered && (
-                    <ShapeBlur
-                        shapeSize={0.94}
-                        roundness={0.1}
-                        borderSize={0.013}
-                        circleSize={0.35}
-                        circleEdge={0.6}
-                    />
-                )}
+        <article className="group relative rounded-2xl overflow-hidden">
+            {/* ShapeBlur is the card frame — revealed by the cursor */}
+            <div className="pointer-events-none absolute inset-0 z-0">
+                <ShapeBlur
+                    shapeSize={0.92}
+                    roundness={0.12}
+                    borderSize={0.012}
+                    circleSize={0.5}
+                    circleEdge={0.9}
+                />
             </div>
 
             {/* Preview Image */}

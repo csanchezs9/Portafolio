@@ -208,17 +208,17 @@ export default function Hero() {
             {!termOpen && (
               <motion.button
                 onClick={() => setTermOpen(true)}
-                initial={{ opacity: 0, y: -6 }}
+                initial={{ opacity: 0 }}
                 animate={{ opacity: 1, y: [0, -6, 0] }}
-                exit={{ opacity: 0, scale: 0.8 }}
+                exit={{ opacity: 0 }}
                 transition={{
                   opacity: { duration: 0.4 },
                   y: { repeat: Infinity, duration: 1.6, ease: "easeInOut" },
                 }}
-                className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary backdrop-blur-sm hover:bg-primary/20 transition-colors"
+                className="mb-3 flex flex-col items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors"
               >
-                <MousePointerClick className="h-3.5 w-3.5" />
-                click me
+                <span className="text-xs uppercase tracking-widest">click me</span>
+                <MousePointerClick className="h-4 w-4" />
               </motion.button>
             )}
           </AnimatePresence>

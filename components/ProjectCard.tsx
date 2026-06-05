@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useRef } from "react";
 import { ExternalLink, Github, FileText, Lock } from "lucide-react";
-import ShapeBlur from "@/components/ShapeBlur";
 
 interface ProjectCardProps {
     title: string;
@@ -27,33 +26,40 @@ export default function ProjectCard({
     forFun = false,
     privateRepo = false,
 }: ProjectCardProps) {
-    const [hovered, setHovered] = useState(false);
+    const ref = useRef<HTMLElement>(null);
+
+    const handleMove = (e: React.MouseEvent<HTMLElement>) => {
+        const el = ref.current;
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+        el.style.setProperty("--my", `${e.clientY - r.top}px`);
+    };
 
     return (
         <article
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
+            ref={ref}
+            onMouseMove={handleMove}
             className={`group relative rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.02] ${forFun
                     ? "border-2 border-dashed border-primary/40 hover:border-primary bg-gradient-to-br from-primary/5 to-accent/10"
                     : "border border-border/10 hover:border-border/30 bg-card/30 backdrop-blur-sm"
                 } hover:shadow-2xl hover:shadow-primary/10`}
         >
-            {/* Shape Blur — subtle, only while hovered */}
+            {/* Cursor-following border glow (lights up the nearest edge) */}
             <div
-                className={`pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 ${hovered ? "opacity-[0.18]" : "opacity-0"}`}
-            >
-                {hovered && (
-                    <ShapeBlur
-                        variation={0}
-                        pixelRatioProp={2}
-                        shapeSize={1.4}
-                        roundness={0.5}
-                        borderSize={0.035}
-                        circleSize={0.3}
-                        circleEdge={1}
-                    />
-                )}
-            </div>
+                aria-hidden
+                className="pointer-events-none absolute inset-0 z-[2] rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                style={{
+                    background:
+                        "radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), hsl(var(--primary) / 0.7), transparent 70%)",
+                    padding: "1.5px",
+                    WebkitMask:
+                        "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    WebkitMaskComposite: "xor",
+                    mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                    maskComposite: "exclude",
+                }}
+            />
 
             {/* Preview Image */}
             {preview && (

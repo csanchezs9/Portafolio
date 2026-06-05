@@ -2,12 +2,11 @@
 
 import { useState, useEffect, useRef } from "react";
 import { gsap } from "gsap";
-import { Menu, X, Languages } from "lucide-react";
+import { Languages } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const logoRef = useRef<HTMLAnchorElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
@@ -99,7 +98,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile: language toggle only */}
           <div className="md:hidden flex items-center gap-2">
             <button
               onClick={toggleLanguage}
@@ -108,30 +107,8 @@ export default function Navbar() {
             >
               <Languages size={20} />
             </button>
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
           </div>
         </div>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-border/50 pt-4 space-y-2">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block w-full text-left py-3 px-4 text-sm font-semibold text-muted-foreground hover:text-foreground rounded-lg transition-colors"
-              >
-                {item.name}
-              </a>
-            ))}
-          </div>
-        )}
       </div>
     </nav>
   );

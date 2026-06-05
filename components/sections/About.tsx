@@ -97,62 +97,61 @@ function DeviceCard({ device, data, index }: any) {
       viewport={{ once: true }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative group h-full"
+      className="relative group"
     >
-      <div className="relative h-full flex flex-col bg-card border border-border/50 rounded-2xl p-8 hover:border-primary/50 transition-all duration-300 overflow-hidden">
+      <div className="relative flex flex-col bg-card border border-border/50 rounded-2xl p-8 hover:border-primary/50 transition-all duration-300 overflow-hidden">
         {/* Device illustration */}
         <div className="mb-6 text-foreground">
           {renderDevice()}
         </div>
 
-        {/* Title */}
-        <h3 className="text-xl font-heading font-bold text-center mb-6 text-primary">
+        {/* Title (fixed height so 1- and 2-line titles stay equal) */}
+        <h3 className="text-xl font-heading font-bold text-center mb-6 text-primary min-h-[3.5rem] flex items-center justify-center">
           {data.title}
         </h3>
 
-        {/* Reserved area: hint (idle) and icons (hover) overlaid so the
-            card height never changes on hover (otherwise the stretched row
-            would resize every sibling). */}
-        <div className="relative flex-1 min-h-[14rem]">
-          {/* Hover hint */}
+        {/* Tech icons - grow on hover (only this card; siblings use items-start) */}
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: isHovered ? 1 : 0, height: isHovered ? "auto" : 0 }}
+          transition={{ duration: 0.35, ease: "easeInOut" }}
+          className="grid grid-cols-4 gap-3 overflow-hidden"
+        >
+          {data.techs.map((tech: any, idx: number) => (
+            <motion.div
+              key={tech.name}
+              initial={{ scale: 0.4, opacity: 0, y: 12 }}
+              animate={{
+                scale: isHovered ? 1 : 0.4,
+                opacity: isHovered ? 1 : 0,
+                y: isHovered ? 0 : 12,
+              }}
+              transition={{
+                duration: 0.4,
+                delay: isHovered ? idx * 0.06 : 0,
+                ease: [0.34, 1.56, 0.64, 1],
+              }}
+              whileHover={{ scale: 1.12, y: -4 }}
+              className="flex flex-col items-center gap-1.5 p-2 rounded-lg bg-background/50 hover:bg-background transition-colors"
+            >
+              <tech.icon className="w-7 h-7" style={{ color: tech.color }} />
+              <span className="text-[10px] font-medium text-center leading-tight text-muted-foreground">
+                {tech.name}
+              </span>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Hover hint */}
+        {!isHovered && (
           <motion.p
-            animate={{ opacity: isHovered ? 0 : 1 }}
-            transition={{ duration: 0.25 }}
-            className="absolute inset-0 flex items-center justify-center text-sm text-muted-foreground"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-sm text-muted-foreground text-center mt-4"
           >
             {t.about.viewTech}
           </motion.p>
-
-          {/* Tech icons */}
-          <div
-            className="absolute inset-0 grid grid-cols-4 gap-3 content-start"
-            style={{ pointerEvents: isHovered ? "auto" : "none" }}
-          >
-            {data.techs.map((tech: any, idx: number) => (
-              <motion.div
-                key={tech.name}
-                initial={{ scale: 0.4, opacity: 0, y: 12 }}
-                animate={{
-                  scale: isHovered ? 1 : 0.4,
-                  opacity: isHovered ? 1 : 0,
-                  y: isHovered ? 0 : 12,
-                }}
-                transition={{
-                  duration: 0.4,
-                  delay: isHovered ? idx * 0.06 : 0,
-                  ease: [0.34, 1.56, 0.64, 1],
-                }}
-                whileHover={{ scale: 1.12, y: -4 }}
-                className="flex h-fit flex-col items-center gap-1.5 p-2 rounded-lg bg-background/50 hover:bg-background transition-colors"
-              >
-                <tech.icon className="w-7 h-7" style={{ color: tech.color }} />
-                <span className="text-[10px] font-medium text-center leading-tight text-muted-foreground">
-                  {tech.name}
-                </span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        )}
       </div>
     </motion.div>
   );
@@ -307,7 +306,7 @@ export default function About() {
           </h3>
 
           {/* Device-based tech stack */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-start">
             {Object.entries(techByDevice).map(([device, data], index) => (
               <DeviceCard
                 key={device}

@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { ExternalLink, Github, FileText, Lock } from "lucide-react";
+import CardGlow from "@/components/CardGlow";
 
 interface ProjectCardProps {
     title: string;
@@ -45,21 +46,8 @@ export default function ProjectCard({
                     : "border border-border/10 hover:border-border/30 bg-card/30 backdrop-blur-sm"
                 } hover:shadow-2xl hover:shadow-primary/10`}
         >
-            {/* Cursor-following border glow (lights up the nearest edge) */}
-            <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 z-[2] rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                style={{
-                    background:
-                        "radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), hsl(var(--primary) / 0.7), transparent 70%)",
-                    padding: "1.5px",
-                    WebkitMask:
-                        "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                    WebkitMaskComposite: "xor",
-                    mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                    maskComposite: "exclude",
-                }}
-            />
+            {/* Soft blurred border glow (ShapeBlur-like) */}
+            <CardGlow />
 
             {/* Preview Image */}
             {preview && (

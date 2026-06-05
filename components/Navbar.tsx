@@ -72,20 +72,41 @@ export default function Navbar() {
       };
       applyMorph(0);
 
-      // Collapse to logo-only / expand to full pill
+      // Desktop: where the collapsed pill should sit (top-left corner)
+      const computeLeftX = () => {
+        const logoW = logoRef.current?.offsetWidth ?? 130;
+        const finalBarW = logoW + 16; // bar pl-2 pr-2
+        const navPad = 16; // nav px-4
+        return navPad - (window.innerWidth - finalBarW) / 2;
+      };
+
+      // Collapse to logo-only / expand to full pill (elastic, rubber-band)
       const setCollapsed = (c: boolean) => {
         if (collapsedRef.current === c) return;
         collapsedRef.current = c;
+        const isDesktop = window.matchMedia("(min-width: 768px)").matches;
         gsap.killTweensOf(group);
+        gsap.killTweensOf(bar);
+
         if (c) {
           gsap.to(group, {
             width: 0,
             opacity: 0,
             marginLeft: 0,
-            duration: 0.5,
+            duration: 0.45,
             ease: "power3.inOut",
           });
+          gsap.to(bar, {
+            x: isDesktop ? computeLeftX() : 0,
+            duration: 1,
+            ease: "elastic.out(1, 0.6)",
+          });
         } else {
+          gsap.to(bar, {
+            x: 0,
+            duration: 1,
+            ease: "elastic.out(1, 0.6)",
+          });
           gsap.set(group, { width: "auto", marginLeft: "" });
           const w = group.scrollWidth;
           gsap.fromTo(
@@ -94,8 +115,8 @@ export default function Navbar() {
             {
               width: w,
               opacity: 1,
-              duration: 0.55,
-              ease: "power3.out",
+              duration: 0.9,
+              ease: "elastic.out(1, 0.5)",
               onComplete: () => {
                 gsap.set(group, { width: "auto" });
               },

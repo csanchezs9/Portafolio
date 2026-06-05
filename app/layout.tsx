@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/components/Footer";
 import IntroWrapper from "@/components/IntroWrapper";
 import SmoothScroll from "@/components/SmoothScroll";
+import ClickSpark from "@/components/ClickSpark";
 import { LanguageProvider } from "@/context/LanguageContext";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -51,12 +52,20 @@ export default function RootLayout({
         >
           <LanguageProvider>
             <SmoothScroll>
-              <IntroWrapper>
-                <Navbar />
-                {children}
-                <Footer />
-                <Toaster />
-              </IntroWrapper>
+              <ClickSpark
+                sparkColor="#ffffff"
+                sparkSize={10}
+                sparkRadius={15}
+                sparkCount={8}
+                duration={400}
+              >
+                <IntroWrapper>
+                  <Navbar />
+                  {children}
+                  <Footer />
+                  <Toaster />
+                </IntroWrapper>
+              </ClickSpark>
             </SmoothScroll>
           </LanguageProvider>
         </ThemeProvider>

@@ -82,9 +82,9 @@ export default function Hero() {
   return (
     <div
       ref={sectionRef}
-      className="min-h-screen flex flex-col items-center justify-center relative px-6 md:px-10 lg:px-16 max-w-[1400px] mx-auto py-20 lg:py-0"
+      className="min-h-svh flex flex-col items-center justify-center relative px-6 md:px-10 lg:px-16 max-w-[1400px] mx-auto py-12 sm:py-16 lg:py-0"
     >
-      <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+      <div className="w-full flex flex-col lg:flex-row items-center justify-between gap-5 sm:gap-8 lg:gap-12">
         {/* Left side - Text content */}
         <div className="w-full lg:flex-1 lg:min-w-0 order-2 lg:order-1">
           {/* Small intro text */}
@@ -106,7 +106,7 @@ export default function Hero() {
           {/* Large role with accent color */}
           <h2
             ref={roleRef}
-            className="font-heading text-[clamp(1.75rem,3.8vw,4.5rem)] font-bold mb-6 tracking-tight opacity-0 text-accent leading-none"
+            className="font-heading text-[clamp(1.75rem,3.8vw,4.5rem)] font-bold mb-4 sm:mb-6 tracking-tight opacity-0 text-accent leading-none"
           >
             {t.hero.role}
           </h2>
@@ -114,7 +114,7 @@ export default function Hero() {
           {/* Smaller description */}
           <p
             ref={descriptionRef}
-            className="text-[clamp(0.95rem,1.05vw,1.125rem)] text-muted-foreground mb-8 max-w-2xl leading-relaxed opacity-0"
+            className="text-[clamp(0.95rem,1.05vw,1.125rem)] text-muted-foreground mb-6 sm:mb-8 max-w-2xl leading-relaxed opacity-0"
           >
             {t.hero.description}
           </p>
@@ -166,7 +166,7 @@ export default function Hero() {
         <div
           className="order-1 lg:order-2 flex-shrink-0 lg:mr-[-2rem] xl:mr-[-4rem]"
           style={{
-            width: 'min(85vw, clamp(320px, 36vw, 500px))',
+            width: 'min(60vw, clamp(220px, 36vw, 500px))',
           }}
         >
           <FloatingMacBook />

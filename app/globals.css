@@ -164,3 +164,31 @@
 .glow-on-hover:hover {
   box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
 }
+
+/* Animated hummingbird (sprite sheet 280x48, 4 frames of 70x48) */
+.colibri {
+  width: 70px;
+  height: 48px;
+  background-color: hsl(var(--primary));
+  -webkit-mask: url("/colibri_anim.png") 0 0 / 280px 48px no-repeat;
+  mask: url("/colibri_anim.png") 0 0 / 280px 48px no-repeat;
+  animation: colibri-flap 0.45s steps(4) infinite,
+    colibri-bob 2.4s ease-in-out infinite;
+}
+
+@keyframes colibri-flap {
+  to {
+    -webkit-mask-position: -280px 0;
+    mask-position: -280px 0;
+  }
+}
+
+@keyframes colibri-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-7px) rotate(3deg);
+  }
+}

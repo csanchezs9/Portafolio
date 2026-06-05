@@ -165,30 +165,38 @@
   box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
 }
 
-/* Animated hummingbird (sprite sheet 280x48, 4 frames of 70x48) */
+/* Animated hummingbird (sprite sheet 280x48, 4 frames of 70x48).
+   Fast wing flap + flight path, ported from skizophonic.com. */
 .colibri {
   width: 70px;
   height: 48px;
   background-color: hsl(var(--primary));
   -webkit-mask: url("/colibri_anim.png") 0 0 / 280px 48px no-repeat;
   mask: url("/colibri_anim.png") 0 0 / 280px 48px no-repeat;
-  animation: colibri-flap 0.45s steps(4) infinite,
-    colibri-bob 2.4s ease-in-out infinite;
+  animation: colibri-wings 0.15s steps(4) infinite,
+    colibri-fly 5s ease infinite;
 }
 
-@keyframes colibri-flap {
+@keyframes colibri-wings {
   to {
     -webkit-mask-position: -280px 0;
     mask-position: -280px 0;
   }
 }
 
-@keyframes colibri-bob {
-  0%,
-  100% {
-    transform: translateY(0) rotate(-3deg);
-  }
-  50% {
-    transform: translateY(-7px) rotate(3deg);
-  }
+@keyframes colibri-fly {
+  0% { filter: blur(3px); rotate: -10deg; transform: translateY(0px) translate(0px); }
+  7% { filter: blur(0px); transform: translateY(20px) translate(10px); }
+  22% { rotate: 0deg; transform: translateY(10px) translate(0px); }
+  30% { rotate: -5deg; transform: translateY(-10px) translate(10px); }
+  44% { filter: blur(0px); rotate: 10deg; transform: translateY(10px) translate(15px); }
+  46% { filter: blur(3px); rotate: 20deg; }
+  50% { filter: blur(0px); transform: translateY(20px) translate(5px); }
+  58% { transform: translateY(0px) translate(20px); }
+  72% { rotate: -5deg; transform: translateY(10px) translate(0px); }
+  80% { transform: translateY(-10px) translate(5px); }
+  89% { filter: blur(0px); rotate: 5deg; }
+  92% { filter: blur(3px); rotate: -10deg; transform: translateY(10px) translate(-5px); }
+  94% { filter: blur(0px); rotate: 0deg; }
+  100% { transform: translateY(0px) translate(0px); }
 }

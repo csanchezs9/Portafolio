@@ -103,7 +103,7 @@ export default function Navbar() {
           if (isDesktop) {
             tl.to(
               bar,
-              { x: computeLeftX(), duration: 0.8, ease: "back.out(1.2)" },
+              { x: computeLeftX(), duration: 0.8, ease: "power3.out" },
               "+=0.1"
             );
           }

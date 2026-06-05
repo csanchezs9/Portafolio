@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Mail, ArrowDown, Download, MousePointerClick } from "lucide-react";
+import { Mail, ArrowDown, Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import FloatingMacBook from "@/components/FloatingMacBook";
@@ -206,8 +206,7 @@ export default function Hero() {
         >
           <AnimatePresence>
             {!termOpen && (
-              <motion.button
-                onClick={() => setTermOpen(true)}
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1, y: [0, -6, 0] }}
                 exit={{ opacity: 0 }}
@@ -215,11 +214,32 @@ export default function Hero() {
                   opacity: { duration: 0.4 },
                   y: { repeat: Infinity, duration: 1.6, ease: "easeInOut" },
                 }}
-                className="mb-3 flex flex-col items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
+                className="pointer-events-none mb-2 flex flex-col items-center gap-1 text-muted-foreground"
               >
-                <span className="text-xs uppercase tracking-widest">click me</span>
-                <MousePointerClick className="h-4 w-4" />
-              </motion.button>
+                <span className="text-xs uppercase tracking-widest">
+                  click on the laptop
+                </span>
+                <svg
+                  width="42"
+                  height="34"
+                  viewBox="0 0 42 34"
+                  fill="none"
+                  className="text-muted-foreground"
+                >
+                  <path
+                    d="M8 3 C 7 16, 14 27, 28 28"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M28 28 L 20 25 M28 28 L 24 20"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </motion.div>
             )}
           </AnimatePresence>
           <FloatingMacBook onClick={() => setTermOpen(true)} />

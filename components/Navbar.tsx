@@ -14,8 +14,10 @@ export default function Navbar() {
   const navRef = useRef<HTMLElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLAnchorElement>(null);
+  const groupRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
   const langRef = useRef<HTMLButtonElement>(null);
+  const collapsedRef = useRef(false);
   const { t, language, setLanguage } = useLanguage();
 
   const navItems = [
@@ -53,10 +55,11 @@ export default function Navbar() {
         "-=0.2"
       );
 
-      // Scroll morph: full-width bar -> floating glass pill (island)
       const bar = barRef.current;
-      if (!bar) return;
+      const group = groupRef.current;
+      if (!bar || !group) return;
 
+      // Glass-pill appearance driven by scroll position
       const applyMorph = (raw: number) => {
         const p = Math.min(1, Math.max(0, raw));
         gsap.set(bar, {
@@ -65,24 +68,51 @@ export default function Navbar() {
           backdropFilter: `blur(${14 * p}px)`,
           WebkitBackdropFilter: `blur(${14 * p}px)`,
           boxShadow: `0 14px 40px -14px rgba(251, 134, 103, ${0.4 * p})`,
-          scale: 1 - 0.06 * p,
-          paddingLeft: 16 + 8 * p,
-          paddingRight: 16 + 8 * p,
         });
       };
-
       applyMorph(0);
-      const proxy = { p: 0 };
-      gsap.to(proxy, {
-        p: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: document.documentElement,
-          start: "top top",
-          end: "+=160",
-          scrub: 0.5,
+
+      // Collapse to logo-only / expand to full pill
+      const setCollapsed = (c: boolean) => {
+        if (collapsedRef.current === c) return;
+        collapsedRef.current = c;
+        gsap.killTweensOf(group);
+        if (c) {
+          gsap.to(group, {
+            width: 0,
+            opacity: 0,
+            marginLeft: 0,
+            duration: 0.5,
+            ease: "power3.inOut",
+          });
+        } else {
+          gsap.set(group, { width: "auto", marginLeft: "" });
+          const w = group.scrollWidth;
+          gsap.fromTo(
+            group,
+            { width: 0, opacity: 0 },
+            {
+              width: w,
+              opacity: 1,
+              duration: 0.55,
+              ease: "power3.out",
+              onComplete: () => {
+                gsap.set(group, { width: "auto" });
+              },
+            }
+          );
+        }
+      };
+
+      ScrollTrigger.create({
+        start: 0,
+        end: "max",
+        onUpdate: (self) => {
+          const sc = self.scroll();
+          applyMorph(sc / 160);
+          if (sc < 100) setCollapsed(false); // near top: always full
+          else setCollapsed(self.direction === 1); // down -> collapse, up -> expand
         },
-        onUpdate: () => applyMorph(proxy.p),
       });
     }, navRef);
 
@@ -96,42 +126,46 @@ export default function Navbar() {
     >
       <div
         ref={barRef}
-        className="flex items-center gap-1 sm:gap-3 rounded-full border border-transparent py-2"
-        style={{ transformOrigin: "center top", willChange: "transform" }}
+        className="flex items-center rounded-full border border-transparent py-2 pl-2 pr-2"
+        style={{ willChange: "transform" }}
       >
-        {/* Logo */}
+        {/* Logo (always visible) */}
         <a
           ref={logoRef}
           href="#hero"
-          className="px-2 text-xl font-heading font-extrabold tracking-tight opacity-0"
+          className="px-2 text-xl font-heading font-extrabold tracking-tight opacity-0 whitespace-nowrap"
         >
           <span className="text-foreground">Csanchezs</span>
           <span className="text-primary">.dev</span>
         </a>
 
-        {/* Desktop links */}
-        <div ref={linksRef} className="hidden md:flex items-center gap-1">
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="relative px-4 py-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors opacity-0 group"
-            >
-              {item.name}
-              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary group-hover:w-3/4 transition-all duration-300" />
-            </a>
-          ))}
-        </div>
-
-        {/* Language toggle */}
-        <button
-          ref={langRef}
-          onClick={toggleLanguage}
-          className="p-2 rounded-full opacity-0 hover:bg-accent/10 transition-colors text-muted-foreground hover:text-foreground"
-          aria-label="Toggle Language"
+        {/* Collapsible group: links + language */}
+        <div
+          ref={groupRef}
+          className="ml-1 flex items-center gap-1 sm:gap-3 overflow-hidden whitespace-nowrap"
         >
-          <Languages size={20} />
-        </button>
+          <div ref={linksRef} className="hidden md:flex items-center gap-1">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="relative px-4 py-2 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors opacity-0 group"
+              >
+                {item.name}
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary group-hover:w-3/4 transition-all duration-300" />
+              </a>
+            ))}
+          </div>
+
+          <button
+            ref={langRef}
+            onClick={toggleLanguage}
+            className="p-2 rounded-full opacity-0 hover:bg-accent/10 transition-colors text-muted-foreground hover:text-foreground"
+            aria-label="Toggle Language"
+          >
+            <Languages size={20} />
+          </button>
+        </div>
       </div>
     </nav>
   );

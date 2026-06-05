@@ -161,7 +161,7 @@ const translations: Record<Language, Translations> = {
                 },
                 santichill: {
                     title: "Santi Chill",
-                    desc: "Experimental animated landing with Three.js shader effects, GSAP-driven motion and Lenis smooth scrolling.",
+                    desc: "Motion-heavy experimental landing built on Next.js 16 + React 19. Custom Three.js/WebGL shader effects (ShapeBlur), GSAP timelines for choreographed entrances and scroll-driven reveals, buttery Lenis smooth scrolling and a from-scratch Tailwind 4 UI. A playground for pushing interaction and micro-animation to the edge.",
                 },
                 diamantePreprensa: {
                     title: "Gráficas Diamante — Prepress",
@@ -269,7 +269,7 @@ const translations: Record<Language, Translations> = {
                 },
                 santichill: {
                     title: "Santi Chill",
-                    desc: "Landing animada experimental con efectos shader en Three.js, movimiento con GSAP y scroll suave con Lenis.",
+                    desc: "Landing experimental cargada de animación, hecha con Next.js 16 + React 19. Efectos shader Three.js/WebGL propios (ShapeBlur), timelines de GSAP para entradas coreografiadas y reveals ligados al scroll, scroll suave con Lenis y UI desde cero con Tailwind 4. Un patio de juego para llevar la interacción y la micro-animación al límite.",
                 },
                 diamantePreprensa: {
                     title: "Gráficas Diamante — Preprensa",

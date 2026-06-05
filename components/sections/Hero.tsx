@@ -214,7 +214,7 @@ export default function Hero() {
                   opacity: { duration: 0.4 },
                   y: { repeat: Infinity, duration: 1.6, ease: "easeInOut" },
                 }}
-                className="pointer-events-none mb-2 flex flex-col items-center gap-1 text-muted-foreground"
+                className="pointer-events-none mb-2 hidden md:flex flex-col items-center gap-1 text-muted-foreground"
               >
                 <span className="text-xs uppercase tracking-widest">
                   click on the laptop

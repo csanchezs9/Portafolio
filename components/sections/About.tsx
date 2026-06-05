@@ -131,11 +131,11 @@ function DeviceCard({ device, data, index }: any) {
                 delay: isHovered ? idx * 0.06 : 0,
                 ease: [0.34, 1.56, 0.64, 1],
               }}
-              whileHover={{ scale: 1.12, y: -4 }}
-              className="flex flex-col items-center gap-1.5 p-2 rounded-lg bg-background/50 hover:bg-background transition-colors"
+              whileHover={{ scale: 1.15, y: -4 }}
+              className="group/tech flex flex-col items-center gap-1.5"
             >
-              <tech.icon className="w-7 h-7 shrink-0" style={{ color: tech.color }} />
-              <span className="w-full text-[11px] font-medium text-center leading-tight text-muted-foreground break-words">
+              <tech.icon className="w-8 h-8 shrink-0" style={{ color: tech.color }} />
+              <span className="text-[10px] font-medium text-center leading-tight text-muted-foreground break-words opacity-0 transition-opacity duration-200 group-hover/tech:opacity-100">
                 {tech.name}
               </span>
             </motion.div>

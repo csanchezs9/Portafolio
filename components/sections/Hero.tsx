@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Mail, ArrowDown, Download } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import FloatingMacBook from "@/components/FloatingMacBook";
+import HoverBubble from "@/components/HoverBubble";
 import { useLanguage } from "@/context/LanguageContext";
 
 if (typeof window !== "undefined") {
@@ -140,21 +141,33 @@ export default function Hero() {
           {/* CTA and Social */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
             <div ref={ctaRef} className="flex flex-wrap gap-4 opacity-0">
-              <a
-                href="mailto:camilosanchezs288@gmail.com?subject=Contacto desde portafolio"
-                className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-8 sm:py-4 bg-transparent border-2 border-primary text-primary hover:bg-primary/10 rounded-md font-medium transition-all duration-200 glow-on-hover"
+              <HoverBubble
+                title={t.hero.talkBubble.title}
+                sub={t.hero.talkBubble.sub}
+                accent="primary"
               >
-                <Mail className="w-5 h-5" />
-                {t.hero.cta}
-              </a>
-              <a
-                href="/Camilo_Sanchez_CV_EN.pdf"
-                download
-                className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-8 sm:py-4 bg-transparent border-2 border-accent text-accent hover:bg-accent/10 rounded-md font-medium transition-all duration-200 glow-on-hover"
+                <a
+                  href="mailto:camilosanchezs288@gmail.com?subject=Contacto desde portafolio"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-8 sm:py-4 bg-transparent border-2 border-primary text-primary hover:bg-primary/10 rounded-md font-medium transition-all duration-200 glow-on-hover"
+                >
+                  <Mail className="w-5 h-5" />
+                  {t.hero.cta}
+                </a>
+              </HoverBubble>
+              <HoverBubble
+                title={t.hero.cvBubble.title}
+                sub={t.hero.cvBubble.sub}
+                accent="accent"
               >
-                <Download className="w-5 h-5" />
-                {t.hero.downloadCv}
-              </a>
+                <a
+                  href="/Camilo_Sanchez_CV_EN.pdf"
+                  download
+                  className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-8 sm:py-4 bg-transparent border-2 border-accent text-accent hover:bg-accent/10 rounded-md font-medium transition-all duration-200 glow-on-hover"
+                >
+                  <Download className="w-5 h-5" />
+                  {t.hero.downloadCv}
+                </a>
+              </HoverBubble>
             </div>
 
             <div ref={socialsRef} className="flex gap-4 opacity-0">

@@ -17,6 +17,8 @@ interface Translations {
         cta: string;
         downloadCv: string;
         scroll: string;
+        talkBubble: { title: string; sub: string };
+        cvBubble: { title: string; sub: string };
     };
     about: {
         title: string;
@@ -93,6 +95,8 @@ const translations: Record<Language, Translations> = {
             cta: "Let's talk!",
             downloadCv: "Download CV",
             scroll: "Scroll",
+            talkBubble: { title: "Let's talk!", sub: "tell me your idea" },
+            cvBubble: { title: "Download it now", sub: "to get to know me" },
         },
         about: {
             title: "About Me",
@@ -195,6 +199,8 @@ const translations: Record<Language, Translations> = {
             cta: "¡Hablemos!",
             downloadCv: "Descargar CV",
             scroll: "Scroll",
+            talkBubble: { title: "¡Hablemos!", sub: "cuéntame tu idea" },
+            cvBubble: { title: "Descárgala ahora", sub: "para conocerme más" },
         },
         about: {
             title: "Sobre mí",

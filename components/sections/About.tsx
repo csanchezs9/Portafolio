@@ -16,9 +16,17 @@ import {
   SiTypescript,
   SiTailwindcss,
   SiDjango,
-  SiVite
+  SiVite,
+  SiGreensock,
+  SiExpo,
+  SiPostgresql,
+  SiFirebase,
+  SiAmazondynamodb,
+  SiAmazonrds,
 } from "react-icons/si";
 import { FaJava } from "react-icons/fa";
+import { TbFileTypeJsx } from "react-icons/tb";
+import { Database } from "lucide-react";
 
 import { useLanguage } from "@/context/LanguageContext";
 import RevealText from "@/components/anim/RevealText";
@@ -48,7 +56,7 @@ function DeviceCard({ device, data, index }: any) {
           <circle cx="100" cy="130" r="3" fill="currentColor" opacity="0.2" />
         </svg>
       );
-    } else {
+    } else if (device === "server") {
       return (
         <svg viewBox="0 0 200 150" className="w-full h-auto">
           {/* Server rack */}
@@ -64,6 +72,20 @@ function DeviceCard({ device, data, index }: any) {
           <circle cx="58" cy="102" r="2" fill="#22c55e" />
         </svg>
       );
+    } else {
+      return (
+        <svg viewBox="0 0 200 150" className="w-full h-auto">
+          {/* Database cylinder */}
+          <ellipse cx="100" cy="35" rx="45" ry="14" fill="currentColor" opacity="0.1" stroke="currentColor" strokeWidth="2" />
+          <path d="M55 35 L55 115" stroke="currentColor" strokeWidth="2" opacity="0.6" fill="none" />
+          <path d="M145 35 L145 115" stroke="currentColor" strokeWidth="2" opacity="0.6" fill="none" />
+          <path d="M55 115 A45 14 0 0 0 145 115" stroke="currentColor" strokeWidth="2" opacity="0.6" fill="none" />
+          {/* Disk separators */}
+          <path d="M55 62 A45 14 0 0 0 145 62" stroke="currentColor" strokeWidth="2" opacity="0.35" fill="none" />
+          <path d="M55 89 A45 14 0 0 0 145 89" stroke="currentColor" strokeWidth="2" opacity="0.35" fill="none" />
+          <rect x="55" y="35" width="90" height="80" fill="currentColor" opacity="0.04" />
+        </svg>
+      );
     }
   };
 
@@ -75,9 +97,9 @@ function DeviceCard({ device, data, index }: any) {
       viewport={{ once: true }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="relative group"
+      className="relative group h-full"
     >
-      <div className="relative bg-card border border-border/50 rounded-2xl p-8 hover:border-primary/50 transition-all duration-300 overflow-hidden">
+      <div className="relative h-full flex flex-col bg-card border border-border/50 rounded-2xl p-8 hover:border-primary/50 transition-all duration-300 overflow-hidden">
         {/* Device illustration */}
         <div className="mb-6 text-foreground">
           {renderDevice()}
@@ -101,15 +123,18 @@ function DeviceCard({ device, data, index }: any) {
           {data.techs.map((tech: any, idx: number) => (
             <motion.div
               key={tech.name}
-              initial={{ scale: 0, opacity: 0 }}
+              initial={{ scale: 0.4, opacity: 0, y: 12 }}
               animate={{
-                scale: isHovered ? 1 : 0,
-                opacity: isHovered ? 1 : 0
+                scale: isHovered ? 1 : 0.4,
+                opacity: isHovered ? 1 : 0,
+                y: isHovered ? 0 : 12,
               }}
               transition={{
-                duration: 0.3,
-                delay: isHovered ? idx * 0.05 : 0
+                duration: 0.4,
+                delay: isHovered ? idx * 0.06 : 0,
+                ease: [0.34, 1.56, 0.64, 1],
               }}
+              whileHover={{ scale: 1.12, y: -4 }}
               className="flex flex-col items-center gap-2 p-3 rounded-lg bg-background/50 hover:bg-background transition-colors"
             >
               <tech.icon
@@ -128,7 +153,7 @@ function DeviceCard({ device, data, index }: any) {
           <motion.p
             initial={{ opacity: 1 }}
             animate={{ opacity: isHovered ? 0 : 1 }}
-            className="text-sm text-muted-foreground text-center mt-4"
+            className="text-sm text-muted-foreground text-center mt-auto pt-4"
           >
             {t.about.viewTech}
           </motion.p>
@@ -153,12 +178,16 @@ export default function About() {
         { name: "TailwindCSS", icon: SiTailwindcss, color: "#06B6D4" },
         { name: "HTML5", icon: SiHtml5, color: "#E34F26" },
         { name: "CSS3", icon: SiCss3, color: "#1572B6" },
+        { name: "GSAP", icon: SiGreensock, color: "#88CE02" },
+        { name: "JSX", icon: TbFileTypeJsx, color: "#61DAFB" },
       ],
     },
     mobile: {
       title: t.about.techTitles.mobile,
       techs: [
         { name: "Flutter", icon: SiFlutter, color: "#02569B" },
+        { name: "Expo", icon: SiExpo, color: "#FFFFFF" },
+        { name: "React Native", icon: SiReact, color: "#61DAFB" },
       ],
     },
     server: {
@@ -169,7 +198,17 @@ export default function About() {
         { name: "Python", icon: SiPython, color: "#3776AB" },
         { name: "Django", icon: SiDjango, color: "#092E20" },
         { name: "Java", icon: FaJava, color: "#007396" },
+      ],
+    },
+    database: {
+      title: t.about.techTitles.database,
+      techs: [
+        { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
         { name: "Supabase", icon: SiSupabase, color: "#3ECF8E" },
+        { name: "Neon", icon: Database, color: "#00E599" },
+        { name: "Firebase", icon: SiFirebase, color: "#FFCA28" },
+        { name: "DynamoDB", icon: SiAmazondynamodb, color: "#4053D6" },
+        { name: "AWS RDS", icon: SiAmazonrds, color: "#527FFF" },
       ],
     },
   };
@@ -273,7 +312,7 @@ export default function About() {
           </h3>
 
           {/* Device-based tech stack */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {Object.entries(techByDevice).map(([device, data], index) => (
               <DeviceCard
                 key={device}

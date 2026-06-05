@@ -34,6 +34,7 @@ interface Translations {
             laptop: string;
             mobile: string;
             server: string;
+            database: string;
         };
     };
     projects: {
@@ -113,6 +114,7 @@ const translations: Record<Language, Translations> = {
                 laptop: "Frontend Development",
                 mobile: "Mobile Development",
                 server: "Backend Development",
+                database: "Databases",
             },
         },
         projects: {
@@ -214,6 +216,7 @@ const translations: Record<Language, Translations> = {
                 laptop: "Desarrollo Frontend",
                 mobile: "Desarrollo Móvil",
                 server: "Desarrollo Backend",
+                database: "Bases de Datos",
             },
         },
         projects: {

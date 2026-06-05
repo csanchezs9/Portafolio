@@ -115,7 +115,7 @@ function DeviceCard({ device, data, index }: any) {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: isHovered ? 1 : 0, height: isHovered ? "auto" : 0 }}
           transition={{ duration: 0.35, ease: "easeInOut" }}
-          className="grid grid-cols-3 gap-3 overflow-hidden"
+          className="grid grid-cols-3 gap-3 overflow-hidden px-1 pt-3"
         >
           {data.techs.map((tech: any, idx: number) => (
             <motion.div

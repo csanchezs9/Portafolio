@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { ExternalLink, Github, FileText, Lock } from "lucide-react";
+import ShapeBlur from "@/components/ShapeBlur";
 
 interface ProjectCardProps {
     title: string;
@@ -25,20 +27,41 @@ export default function ProjectCard({
     forFun = false,
     privateRepo = false,
 }: ProjectCardProps) {
+    const [hovered, setHovered] = useState(false);
+
     return (
         <article
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
             className={`group relative rounded-xl overflow-hidden transition-all duration-300 hover:scale-[1.02] ${forFun
                     ? "border-2 border-dashed border-primary/40 hover:border-primary bg-gradient-to-br from-primary/5 to-accent/10"
                     : "border border-border/10 hover:border-border/30 bg-card/30 backdrop-blur-sm"
                 } hover:shadow-2xl hover:shadow-primary/10`}
         >
+            {/* Shape Blur — subtle, only while hovered */}
+            <div
+                className={`pointer-events-none absolute inset-0 z-0 transition-opacity duration-500 ${hovered ? "opacity-[0.18]" : "opacity-0"}`}
+            >
+                {hovered && (
+                    <ShapeBlur
+                        variation={0}
+                        pixelRatioProp={2}
+                        shapeSize={1.4}
+                        roundness={0.5}
+                        borderSize={0.035}
+                        circleSize={0.3}
+                        circleEdge={1}
+                    />
+                )}
+            </div>
+
             {/* Preview Image */}
             {preview && (
                 <a
                     href={demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block relative h-48 overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20"
+                    className="block relative z-[1] h-48 overflow-hidden bg-gradient-to-br from-primary/20 to-accent/20"
                 >
                     <img
                         src={preview}
@@ -54,7 +77,7 @@ export default function ProjectCard({
             )}
 
             {/* Card Content */}
-            <div className="p-6 space-y-4">
+            <div className="relative z-[1] p-6 space-y-4">
                 {/* Header with Title and Badge */}
                 <div className="flex items-start justify-between gap-3">
                     <h3 className="text-xl font-heading font-bold text-primary leading-tight group-hover:text-primary/80 transition-colors">

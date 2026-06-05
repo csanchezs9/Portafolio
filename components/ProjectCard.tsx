@@ -31,7 +31,7 @@ export default function ProjectCard({
             {/* ShapeBlur is the card frame — revealed by the cursor */}
             <div className="pointer-events-none absolute inset-0 z-0 opacity-60">
                 <ShapeBlur
-                    shapeSize={0.92}
+                    shapeSize={0.96}
                     roundness={0.12}
                     borderSize={0.012}
                     circleSize={0.42}
@@ -61,7 +61,7 @@ export default function ProjectCard({
             )}
 
             {/* Card Content */}
-            <div className="relative z-[1] p-6 space-y-4">
+            <div className="relative z-[1] p-8 space-y-4">
                 {/* Header with Title and Badge */}
                 <div className="flex items-start justify-between gap-3">
                     <h3 className="text-xl font-heading font-bold text-primary leading-tight group-hover:text-primary/80 transition-colors">

@@ -124,7 +124,7 @@ export default function Hero() {
             <div ref={ctaRef} className="flex flex-wrap gap-4 opacity-0">
               <a
                 href="mailto:camilosanchezs288@gmail.com?subject=Contacto desde portafolio"
-                className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border-2 border-primary text-primary hover:bg-primary/10 rounded-md font-medium transition-all duration-200 glow-on-hover"
+                className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-8 sm:py-4 bg-transparent border-2 border-primary text-primary hover:bg-primary/10 rounded-md font-medium transition-all duration-200 glow-on-hover"
               >
                 <Mail className="w-5 h-5" />
                 {t.hero.cta}
@@ -132,7 +132,7 @@ export default function Hero() {
               <a
                 href="/Camilo_Sanchez_CV_EN.pdf"
                 download
-                className="inline-flex items-center gap-2 px-8 py-4 bg-transparent border-2 border-accent text-accent hover:bg-accent/10 rounded-md font-medium transition-all duration-200 glow-on-hover"
+                className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-8 sm:py-4 bg-transparent border-2 border-accent text-accent hover:bg-accent/10 rounded-md font-medium transition-all duration-200 glow-on-hover"
               >
                 <Download className="w-5 h-5" />
                 {t.hero.downloadCv}
@@ -166,7 +166,7 @@ export default function Hero() {
         <div
           className="order-1 lg:order-2 flex-shrink-0 lg:mr-[-2rem] xl:mr-[-4rem]"
           style={{
-            width: 'min(60vw, clamp(220px, 36vw, 500px))',
+            width: 'min(85vw, clamp(320px, 36vw, 500px))',
           }}
         >
           <FloatingMacBook />

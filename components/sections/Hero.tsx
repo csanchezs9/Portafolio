@@ -215,7 +215,7 @@ export default function Hero() {
                   opacity: { duration: 0.4 },
                   y: { repeat: Infinity, duration: 1.6, ease: "easeInOut" },
                 }}
-                className="mb-3 flex flex-col items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors"
+                className="mb-3 flex flex-col items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors"
               >
                 <span className="text-xs uppercase tracking-widest">click me</span>
                 <MousePointerClick className="h-4 w-4" />
